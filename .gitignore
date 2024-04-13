@@ -1,0 +1,12 @@
+.vscode/
+/node_modules/*
+/nile-db/.env
+/nile-db/data/*
+/prana-next/node_modules/*
+/prana-next/.env
+/prana-next/package-lock.json
+/prana-next/src/app/testing/components/**/__snapshots__/
+/deprecated/biodiversity-etl/.env
+/deprecated/biodiversity-next/package-lock.json
+/deprecated/nextjs-argis-rene/.env
+/deprecated//nextjs-argis-rene/package-lock.json
