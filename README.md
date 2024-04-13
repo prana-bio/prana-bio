@@ -34,8 +34,4 @@
 - 🗄️ [SQL](https://en.wikipedia.org/wiki/SQL) for reading and writing to PostgresDB.
 
 ##### Powered by [The Nile](https://www.thenile.dev/)
-Nile provides serverless, tenant virtualized data storage that enables modern SaaS. 
-- Tenant isolation, per-tenant backups, and multi-tenant or dedicated infrastructure anywhere on the planet, all within an single database to interact with all these virtual tenant DBs
-- First-class user management capabilities
-- Domain and tenant-aware AI-native architecture
-- Serverless and Cloud-Native
+Nile provides serverless, tenant virtualized data storage to enable SaaS.
