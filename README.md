@@ -3,17 +3,17 @@
 </p>
 
 ---
-
+# Prana
 ![Build Status](https://github.com/cbarrett3/prana-biodiversity/workflows/Vitest%20Unit%20Tests/badge.svg)  
 
 ## Mission
 
-**Prana** aims to provide a seamless platform for exploring, tracking, and protecting biodiversity on earth. 
+**Prana** is platform for exploring, tracking, and protecting biodiversity on earth. 
 
 - Right now, it gathers, organizes, aggregates, and surfaces insights from relevant public datasets so that users are brought closer than ever to the issue of biodiversity loss. 
 - In the future, it aims to connect users with protection organizations, allow them to purchase biodiversity credits, track their progress, and ultimately help them protect biodiversity on earth. 
 
-## Repositories
+## Solutions
 
 ##### Prana Next (Web App)
 🔥 [Next.js](https://nextjs.org) for the UI as well as API Routes.
