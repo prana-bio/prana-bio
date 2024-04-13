@@ -1,4 +1,8 @@
-# Prana 🌎
+<p align="center">
+<img width="1000" alt="image" src="https://github.com/prana-bio/prana-bio/assets/22532948/67b266bb-a3b9-4b09-96d5-288132e941f8">
+</p>
+
+---
 
 ![Build Status](https://github.com/cbarrett3/prana-biodiversity/workflows/Vitest%20Unit%20Tests/badge.svg)  
 
