@@ -15,8 +15,8 @@
 
 ## Solutions
 
-##### Prana Next (Web App)
-🔥 [Next.js](https://nextjs.org) for the UI as well as API Routes.
+##### Prana Next - Web App
+🔥 [Next.js](https://nextjs.org) for the UI and deployment infastructure.
 ✅ [TypeScript](https://www.typescriptlang.org) for type checking and with strict mode enabled.
 ✏️ [ESLint](https://eslint.org) for linting.
 🛠 [Prettier](https://prettier.io) for automatic code formatting.
@@ -29,7 +29,7 @@
 ⚛️ [Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/) for a modular UI built up of atoms, molecules, organisms, layouts, and pages.
 ⚡ [Vitest](https://vitest.dev/) for unit testing components, hooks, and utilities.
 
-##### Prana Engine (Background ETL)
+##### Prana Engine - Background ETL
 - 🐍 [Python ](https://www.python.org/)for data collection, manipulation, aggregation.
 - 🗄️ [SQL](https://en.wikipedia.org/wiki/SQL) for reading and writing to PostgresDB.
 
