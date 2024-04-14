@@ -13,13 +13,13 @@ export function Footer() {
                         {`Support`}
                         <a
                             href={
-                                'https://account.venmo.com/u/cbarrett-97'
+                                'https://github.com/sponsors/prana-bio'
                             }
                             target="_blank"
                             rel="noreferrer"
                             className="font-medium underline underline-offset-4 ml-1"
                         >
-                            <Icons.paypal className="h-4 w-4" />
+                            <Icons.gitHub className="h-4 w-4" />
                         </a>
                     </span>
                 </p>
@@ -38,7 +38,7 @@ export function Footer() {
                         {`Follow`}
                         <a
                             href={
-                                'https://github.com/cbarrett3/prana-biodiversity'
+                                'https://twitter.com/prana_bio'
                             }
                             target="_blank"
                             rel="noreferrer"
@@ -53,7 +53,7 @@ export function Footer() {
                         {`Contribute`}
                         <a
                             href={
-                                'https://github.com/cbarrett3/prana-biodiversity'
+                                'https://github.com/prana-bio/prana-bio'
                             }
                             target="_blank"
                             rel="noreferrer"

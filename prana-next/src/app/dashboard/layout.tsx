@@ -47,13 +47,22 @@ const DashboardLayout = ({
                                     <TabsTrigger value="biodiversity-data">
                                         Species View
                                     </TabsTrigger>
-                                    <TabsTrigger value="research">
+                                    <TabsTrigger
+                                        value="research"
+                                        disabled
+                                    >
                                         Research & News
                                     </TabsTrigger>
-                                    <TabsTrigger value="take-action">
+                                    <TabsTrigger
+                                        value="take-action"
+                                        disabled
+                                    >
                                         Take Action
                                     </TabsTrigger>
-                                    <TabsTrigger value="my-impact">
+                                    <TabsTrigger
+                                        value="my-impact"
+                                        disabled
+                                    >
                                         My Impact
                                     </TabsTrigger>
                                 </TabsList>
