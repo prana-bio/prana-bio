@@ -16,7 +16,7 @@
 ## Solutions
 
 ##### Prana Next - Web App
-🔥 [Next.js](https://nextjs.org) for the UI and deployment infastructure.
+🔥 [Next.js](https://nextjs.org) for the UI framework.
 ✅ [TypeScript](https://www.typescriptlang.org) for type checking and with strict mode enabled.
 ✏️ [ESLint](https://eslint.org) for linting.
 🛠 [Prettier](https://prettier.io) for automatic code formatting.
