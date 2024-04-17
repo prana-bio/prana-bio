@@ -43,20 +43,44 @@ export default function DefaultLogin() {
 
     return (
         <>
+            <style jsx>{`
+                @keyframes floatPulse {
+                    0%,
+                    100% {
+                        transform: translateY(-3px)
+                            scale(0.95) rotateY(0deg);
+                    }
+                    50% {
+                        transform: translateY(3px)
+                            scale(1.18) rotateY(5deg);
+                    }
+                }
+                .logo {
+                    animation: floatPulse 3s ease-in-out
+                        infinite;
+                    display: block;
+                }
+            `}</style>
             <div className="md:hidden">
-                <Image
+                {/* <Image
                     src="/orca.jpg"
                     width={1280}
                     height={843}
                     alt="Authentication"
                     className="block dark:hidden h-screen object-cover"
-                />
-                <Image
-                    src="/orca.jpg"
-                    width={1280}
+                /> */}
+                {/* <Image
+                    src="/logo.png"
+                    width={180}
                     height={843}
                     alt="Authentication"
-                    className="hidden dark:block h-screen object-cover"
+                    className=" h-screen object-cover"
+                /> */}
+                <Image
+                    src="/orca.jpg"
+                    alt="Logo"
+                    width={500}
+                    height={500}
                 />
             </div>
             <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -74,30 +98,37 @@ export default function DefaultLogin() {
                 <div className="relative hidden h-full flex-col bg-muted p-10  dark:border-r lg:flex">
                     <div className="absolute inset-0" />
                     <div className="relative z-20 flex items-center text-lg font-medium">
-                        <span className="text-2xl pr-2">
-                            🦥
-                        </span>{' '}
-                        Prana
+                        <div className="logo">
+                            <Image
+                                src="/logo.png"
+                                alt="Logo"
+                                width={40}
+                                height={40}
+                            />
+                        </div>
                     </div>
+
                     <div className="relative z-20 mt-auto">
                         <blockquote className="space-y-2">
                             <p className="text-lg">
-                                &ldquo;Hey there, Earth
-                                steward! Logging in
-                                isn&apos;t just a digital
-                                handshake; it&apos;s
-                                immersing yourself in the
-                                incredible beauty of our
-                                planet. Did you know? Every
-                                day, around 150 species
-                                vanish. It&apos;s time to
-                                act swiftly and protect the
-                                breathtaking wonders that
-                                make our world so
-                                special.&rdquo;
+                                &ldquo;Biodiversity is the
+                                symphony of life, a melodic
+                                ensemble of species and
+                                habitats that weave together
+                                a tapestry more stunning
+                                than the threads of any
+                                single creature. As each
+                                note resonates with the
+                                next, let us join in harmony
+                                to protect this precious
+                                orchestra, for in its music
+                                lies the warmth of the
+                                world&apos;s heart&comma;
+                                beating in rhythm with our
+                                own.&rdquo;
                             </p>
                             <footer className="text-sm">
-                                -Connor Barrett
+                                - Prana Development Team
                             </footer>
                         </blockquote>
                     </div>
@@ -118,20 +149,11 @@ export default function DefaultLogin() {
                             onError={(err) => push('/')}
                         />
                         <p className="px-8 text-center text-sm text-muted-foreground">
-                            By clicking continue, you agree
-                            to our{' '}
-                            {/* <Link
-                                    href="/terms"
-                                    className="underline underline-offset-4 hover:text-primary"
-                                > */}
-                            Terms of Service
-                            {/* </Link>{' '} */} and{' '}
-                            {/* <Link
-                                    href="/privacy"
-                                    className="underline underline-offset-4 hover:text-primary"
-                                > */}
-                            {` Privacy Policy`}
-                            {/* </Link> */}.
+                            {/* In{' '} */}
+                            <span className="font-semibold text-foreground">
+                                V1
+                            </span>{' '}
+                            available as of 4.22.24 🚀
                         </p>
                     </div>
                     <div className="absolute bottom-4 right-4">

@@ -35,7 +35,12 @@ const Mapbox: React.FC = () => {
         const initializeMap = () => {
             const newMap = new mapboxgl.Map({
                 container: mapContainerRef.current!,
-                style: `mapbox://styles/mapbox/outdoors-v12`,
+                //  style: `mapbox://styles/mapbox/outdoors-v12`,
+                style: `mapbox://styles/mapbox/${
+                    theme === 'dark'
+                        ? 'dark-v11'
+                        : 'light-v11'
+                }`,
                 center: [0, 0],
                 zoom: 0,
             });
@@ -62,7 +67,7 @@ const Mapbox: React.FC = () => {
                                 ],
                                 75,
                             ],
-                            '#16a34a',
+                            '#1f591e',
                             [
                                 '<=',
                                 [
@@ -279,7 +284,7 @@ const generateColorExpression = (property: string) => {
         return [
             'case',
             ['<=', ['get', property], 75],
-            '#16a34a', // Green
+            '#1f591e', // Green
             ['<=', ['get', property], 150],
             '#ffc658', // Yellow
             '#ff6347', // Red
@@ -292,7 +297,7 @@ const generateColorExpression = (property: string) => {
             '#ff6347', // Red
             ['<=', ['get', property], 67],
             '#ffc658', // Yellow
-            '#16a34a', // Green
+            '#1f591e', // Green
         ];
     }
 };

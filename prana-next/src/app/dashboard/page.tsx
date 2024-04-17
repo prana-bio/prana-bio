@@ -205,7 +205,7 @@ const Dashboard: React.FC = () => {
                             Explore the surrounding areas.
                         </CardDescription> */}
                     </CardHeader>
-                    <CardContent>
+                    <CardContent >
                         {/* <ContributionHistory /> */}
                         <BiodiversityMap />
                     </CardContent>
