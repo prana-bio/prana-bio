@@ -151,7 +151,7 @@ export default function DefaultLogin() {
                         <p className="px-8 text-center text-sm text-muted-foreground">
                             {/* In{' '} */}
                             <span className="font-semibold text-foreground">
-                                V1
+                                Version 0.1.0
                             </span>{' '}
                             available as of 4.22.24 🚀
                         </p>
