@@ -1,4 +1,4 @@
-# Prana Web
+# prana-next: Next.js Web App
 
 ## Versions
 0.1 - Authentication, biodiversity exploration.
