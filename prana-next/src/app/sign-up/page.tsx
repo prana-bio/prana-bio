@@ -43,6 +43,27 @@ export default function AuthenticationPage() {
 
     return (
         <>
+            <style jsx>{`
+                @keyframes floatPulse {
+                    0%,
+                    100% {
+                        transform: translateY(-1px) scale(1)
+                            rotateY(0deg);
+                    }
+                    50% {
+                        transform: translateY(3px)
+                            scale(1.1) rotateY(5deg);
+                    }
+                }
+                .logo {
+                    animation: floatPulse 3s ease-in-out
+                        infinite;
+                    display: block;
+                    filter: drop-shadow(
+                        5px 5px 5px rgba(0, 0, 0, 0.5)
+                    ); /* Example shadow: horizontal offset, vertical offset, blur radius, color */
+                }
+            `}</style>
             <div className="md:hidden">
                 <Image
                     src="/dakota.jpg"
@@ -74,10 +95,14 @@ export default function AuthenticationPage() {
                 <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
                     <div className="absolute inset-0" />
                     <div className="relative z-20 flex items-center text-lg font-medium">
-                        <span className="text-2xl pr-2">
-                            🦣
-                        </span>{' '}
-                        Prana
+                        <div className="logo">
+                            <Image
+                                src="/file2.png"
+                                alt="Logo"
+                                width={50}
+                                height={50}
+                            />
+                        </div>
                     </div>
                     <div className="relative z-20 mt-auto">
                         <blockquote className="space-y-2">

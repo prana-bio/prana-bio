@@ -120,7 +120,8 @@ export function LogInForm({
                         />
                     </div>
                     <Button
-                        className={`mt-4`}
+                        variant="default"
+                        className={`mt-4 bg-primary`}
                         disabled={isLoading}
                         type="submit"
                     >
@@ -131,7 +132,7 @@ export function LogInForm({
                     </Button>
                 </div>
             </form>
-            <div className="relative">
+            {/* <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t" />
                 </div>
@@ -146,13 +147,13 @@ export function LogInForm({
                 type="button"
                 disabled={true}
             >
-                {/* {isLoading ? (
+                {isLoading ? (
                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                ) : ( */}
+                ) : (
                 <Icons.gitHub className="mr-2 h-4 w-4" />
-                {/* )}{' '} */}
+                )}{' '}
                 Github
-            </Button>
+            </Button> */}
         </div>
     );
 }

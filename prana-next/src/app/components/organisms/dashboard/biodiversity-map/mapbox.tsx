@@ -67,7 +67,7 @@ const Mapbox: React.FC = () => {
                                 ],
                                 75,
                             ],
-                            '#1f591e',
+                            '#426827',
                             [
                                 '<=',
                                 [
@@ -284,7 +284,7 @@ const generateColorExpression = (property: string) => {
         return [
             'case',
             ['<=', ['get', property], 75],
-            '#1f591e', // Green
+            '#426827', // Green
             ['<=', ['get', property], 150],
             '#ffc658', // Yellow
             '#ff6347', // Red
@@ -297,7 +297,7 @@ const generateColorExpression = (property: string) => {
             '#ff6347', // Red
             ['<=', ['get', property], 67],
             '#ffc658', // Yellow
-            '#1f591e', // Green
+            '#426827', // Green
         ];
     }
 };

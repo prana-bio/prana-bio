@@ -47,18 +47,21 @@ export default function DefaultLogin() {
                 @keyframes floatPulse {
                     0%,
                     100% {
-                        transform: translateY(-3px)
-                            scale(0.95) rotateY(0deg);
+                        transform: translateY(-1px) scale(1)
+                            rotateY(0deg);
                     }
                     50% {
                         transform: translateY(3px)
-                            scale(1.18) rotateY(5deg);
+                            scale(1.1) rotateY(5deg);
                     }
                 }
                 .logo {
                     animation: floatPulse 3s ease-in-out
                         infinite;
                     display: block;
+                    filter: drop-shadow(
+                        5px 5px 5px rgba(0, 0, 0, 0.5)
+                    ); /* Example shadow: horizontal offset, vertical offset, blur radius, color */
                 }
             `}</style>
             <div className="md:hidden">
@@ -100,10 +103,10 @@ export default function DefaultLogin() {
                     <div className="relative z-20 flex items-center text-lg font-medium">
                         <div className="logo">
                             <Image
-                                src="/logo.png"
+                                src="/file2.png"
                                 alt="Logo"
-                                width={40}
-                                height={40}
+                                width={60}
+                                height={60}
                             />
                         </div>
                     </div>
@@ -123,8 +126,8 @@ export default function DefaultLogin() {
                                 to protect this precious
                                 orchestra, for in its music
                                 lies the warmth of the
-                                world&apos;s heart&comma;
-                                beating in rhythm with our
+                                world&apos;s heart, beating
+                                in rhythm with our
                                 own.&rdquo;
                             </p>
                             <footer className="text-sm">
