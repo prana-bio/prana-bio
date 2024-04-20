@@ -97,6 +97,7 @@ export function LogInForm({
                             autoComplete="on"
                             autoCorrect="off"
                             disabled={isLoading}
+                            className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
                         />
                     </div>
                     <div className="grid gap-1">
@@ -117,6 +118,7 @@ export function LogInForm({
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={isLoading}
+                            className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
                         />
                     </div>
                     <Button
