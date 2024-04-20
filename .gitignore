@@ -1,7 +1,7 @@
 .vscode/
 /node_modules/*
-/nile-db/.env
-/nile-db/data/*
+/prana-db/.env
+/prana-db/data/*
 /prana-next/node_modules/*
 /prana-next/.env
 /prana-next/package-lock.json

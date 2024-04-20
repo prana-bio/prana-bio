@@ -1,0 +1,282 @@
+Table app.users as AU {
+  user_id uuid [pk]
+  full_name varchar
+  username varchar
+  email varchar
+  phone varchar
+  birthday date
+  language enum
+  biography varchar
+  twitter varchar
+  instagram varchar
+  website varchar
+  dark_mode boolean
+  text_notifications boolean
+  email_notifications boolean
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table app.tenants as AT {
+  tenant_id uuid
+  tenant_name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table app.tenant_users as AUT {
+  tenant_id uuid [ref: > AT.tenant_id]
+  user_id uuid [ref: > AU.user_id]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table app.payment_methods as APM {
+  payment_method_id uuid [pk]
+  tenant_id uuid [ref: > AT.tenant_id]
+  user_id uuid [ref: > AU.user_id]
+  method_type tuple
+  encrypted_first_name varchar
+  encrypted_last_name varchar
+  encrypted_expire_month int
+  encrypted_expire_year int
+  encrypted_cvc int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table app.collections as AC {
+  collection_id uuid [pk]
+  tenant_id uuid [ref: > AT.tenant_id]
+  user_id uuid [ref: > AU.user_id]
+  collection_name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table app.article_collections as AAC {
+  tenant_id uuid [ref: > AT.tenant_id]
+  user_id uuid [ref: > AU.user_id]
+  article_id uuid [ref: > PA.article_id]
+  collection_id uuid [ref: > AC.collection_id]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table app.donations as AD {
+  donation_id uuid [pk]
+  tenant_id uuid [ref: > AT.tenant_id]
+  user_id uuid [ref: > AU.user_id]
+  conservation_organization_id uuid [ref: > PCO.conservation_organization_id]
+  payment_method_id uuid [ref: > APM.payment_method_id]
+  amount float
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.conservation_organizations as PCO {
+  conservation_organization_id uuid [pk]
+  url varchar
+  name varchar
+  thumbnail varchar
+  certified_on date
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.strategies as PS {
+  strategy_id uuid [pk]
+  strategy_name varchar
+  description text
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.conservation_organization_strategies as PCOS {
+  conservation_organization_id uuid [ref: > PCO.conservation_organization_id]
+  strategy_id uuid [ref: > PS.strategy_id]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.conservation_organization_countries as PCOC {
+  conservation_organization_id uuid [ref: > PCO.conservation_organization_id]
+  country_id uuid [ref: > PC.country_id]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.articles as PA {
+  article_id uuid [pk]
+  url varchar
+  name varchar
+  author_name varchar
+  publisher_name varchar
+  thumbnail varchar
+  place_sourced varchar
+  published_on date 
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.countries as PC {
+  country_id uuid [pk]
+  name varchar
+  iso_alpha2 char(2)
+  iso_alpha3 char(3)
+  region varchar
+  geometry geometry(Geometry, 4326)
+}
+
+Table public.kingdoms as PKI {
+  kingdom_id uuid [pk]
+  name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.phyla as PPH {
+  phyla_id uuid [pk]
+  kingdom_id uuid [ref: > PKI.kingdom_id]
+  name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.classes as PCL {
+  class_id uuid [pk]
+  phyla_id uuid [ref: > PPH.phyla_id]
+  name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.orders as POR {
+  order_id uuid [pk]
+  class_id uuid [ref: > PCL.class_id]
+  name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.families as PFA {
+  family_id uuid [pk]
+  order_id uuid [ref: > POR.order_id]
+  name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.genera as PGE {
+  genera_id uuid [pk]
+  family_id uuid [ref: > PFA.family_id]
+  name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.species as PSP {
+  species_id uuid [pk]
+  genera_id uuid [ref: > PGE.genera_id]
+  name varchar
+  common_name varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.species_iucn_status as PSIS {
+  species_id uuid [ref: > PSP.species_id]
+  category enum
+  assessment_year int
+  source_url varchar
+  notes text
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.species_countries as PSC {
+  country_id uuid [ref: > PC.country_id]
+  species_id uuid [ref: > PSP.species_id]
+  name varchar
+  total_area float
+  country_area float
+  country_area_percent_of_total float
+  assessment_year int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.terrestrial_biome_protected_area_index as PTBPAI {
+  tbpai_id uuid [pk]
+  country_id uuid [ref: > PC.country_id]
+  assessment_year int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.marine_protected_area_index as PMPAI {
+  mpai_id uuid [pk]
+  country_id uuid [ref: > PC.country_id]
+  assessment_year int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.protected_area_representativeness_index as PPARI {
+  pari_id uuid [pk]
+  country_id uuid [ref: > PC.country_id]
+  assessment_year int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.species_habitat_index as PSHI {
+  shi_id uuid [pk]
+  country_id uuid [ref: > PC.country_id]
+  assessment_year int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.species_protection_index as PSPI {
+  spi_id uuid [pk]
+  country_id uuid [ref: > PC.country_id]
+  assessment_year int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table public.biodiversity_habitat_index as PBHI {
+  bhi_id uuid [pk]
+  country_id uuid [ref: > PC.country_id]
+  assessment_year int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}

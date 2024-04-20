@@ -1,0 +1,67 @@
+IDEAS:
+- dashboard for tracking your contributions to land and species conservation
+- calculate trees saved KPI and over time
+- calculate GHG emissions absorbed KPI and over time (constantly ticking up)
+- certified "Prana" badges for hitting milestones
+	- by species protected
+	- by country
+	- by ecosystem (mangrove, forest, coral reef, etc.)
+	- by amount square km of land preserved
+	- by trees planted
+	- by amount of C02 saved
+- dashboard for tracking biodiversity levels (mapbox)
+- overlay of areas/countries that are at risk (richness index * development index * climate change index = risk index by country)
+- overlay of species with protected area
+- overlay of your contributions
+- overlay of land that is protected
+- kpi for impact relative to income
+- manual round-up sites/ngos that offfer donations and funding to protect land
+- eventually, sites/ngos can directly apply to be certified and added
+- work with half world project for identifying areas within countries
+
+PROBLEMS BEING SOLVED:
+- being able to track your contributions
+- being able to find new places to contribute
+- being able to do this as an individual or an org
+- being able to share this with your network (promote, or regulartory requirements, earn badges or rewards, share with network)
+- beautiful and modern platform
+
+DESIGN PLAN:
+- top navigation row
+	- user/tenant dropdown
+	- dashboard (selected by default)
+	- stories
+	- settings
+	- prana logo top right
+
+- dashboard tab
+	- top row
+	   - "dashboard" top left
+	   - "country" search dropdown - to filter dashboard
+	   - "share" top right
+	- tabs
+	   - global overview (default - kpis)
+	   - my impact (kpis - can be by user/tenant and by country/globe)
+	   - explorer map
+	       - ratings (0-100) on richness, land risk, climate change rate
+- settings tab
+	- profile
+	- account
+	- payments
+	- notifications
+
+
+PHASE 1
+   - design plan
+   - make figma design (if needed)
+   - build ui w/ dummy data
+   - workshop db design (b2c and b2b) with nile team
+   - design and create db
+   - gather and populate data
+   - extend ui w/ real data
+
+
+PHASE 2
+   - unit/integration testing
+   - 3rd party auth
+   - deployment

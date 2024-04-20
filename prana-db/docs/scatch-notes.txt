@@ -1,0 +1,13 @@
+- countries (country_id (dashboard context))
+
+   - countries_epis (country_id fk)
+
+   - countries_species_counts (country_id, birds, amphibians, etc.) 
+
+   - countries_redlist_species_counts (country_id, birds, amphibians, etc.) 
+
+   - countries_redlist_species (country_id, species_id)
+
+- species
+
+   - 
