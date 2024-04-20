@@ -134,7 +134,7 @@ export default function DefaultLogin() {
                         />
                         <p className="px-8 text-center text-sm text-muted-foreground">
                             <span className="font-semibold text-foreground">
-                                Version 0.1.0
+                                Version 0.1
                             </span>{' '}
                             available as of 4.22.24 🚀
                         </p>
