@@ -1,7 +1,7 @@
 # Prana Web
 
 ## Versions
-1.0.0 - Authentication, biodiversity exploration.
+0.1 - Authentication, biodiversity exploration.
 
 ## Tech Stack
 
