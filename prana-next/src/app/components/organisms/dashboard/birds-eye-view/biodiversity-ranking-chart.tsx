@@ -46,7 +46,7 @@ const BiodiversityRankingChart: React.FC<
     const getBarColor = (rank: number) => {
         return rank <= 75
             ? // ? '#16a34a'
-              `#1f591e`
+              `#426827`
             : rank <= 150
             ? '#ffc658'
             : '#ff6347';

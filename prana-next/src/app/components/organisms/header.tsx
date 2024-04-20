@@ -12,10 +12,10 @@ export function Header() {
                 <div className="flex h-16 items-center px-4">
                     <div className="flex-none pr-3">
                         <Image
-                            src="/logo.png"
+                            src="/file2.png"
                             alt="Logo"
-                            width={35}
-                            height={35}
+                            width={50}
+                            height={50}
                         />
                     </div>
                     <TeamSwitcher />

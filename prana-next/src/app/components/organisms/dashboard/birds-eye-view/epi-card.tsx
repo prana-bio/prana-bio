@@ -29,6 +29,13 @@ const EPICard: React.FC<EPICardProps> = ({
     onClick,
 }) => {
     const { theme } = useTheme();
+    const formattedScore =
+        score === 0 || score === null ? 'N/A' : score;
+    const formattedRank =
+        rank === -1 ? 'Unranked' : `#${rank}`;
+    const formattedChange =
+        change === null ? '' : `${change}% past 10 years`;
+
     return (
         <div
             onClick={onClick}
@@ -57,34 +64,36 @@ const EPICard: React.FC<EPICardProps> = ({
                                 Rank
                                 <p
                                     className={`font-semibold ${
-                                        rank <= 75
+                                        formattedRank ===
+                                        'Unranked'
+                                            ? 'text-muted-foreground' // Use gray if rank is Unranked
+                                            : rank <= 75
                                             ? 'text-primary'
                                             : rank <= 150
                                             ? 'text-warning'
                                             : 'text-destructive'
                                     }`}
                                 >
-                                    #{rank}
+                                    {formattedRank}
                                 </p>
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
                             <div
                                 className={`text-2xl font-bold ${
-                                    score >= 66
+                                    formattedScore === 'N/A'
+                                        ? 'text-muted-foreground'
+                                        : score >= 66
                                         ? 'text-primary'
                                         : score >= 33
                                         ? 'text-warning'
                                         : 'text-destructive'
                                 }`}
                             >
-                                {score}
+                                {formattedScore}
                             </div>
                             <p className="text-xs text-muted-foreground">
-                                {change >= 0
-                                    ? `+${change}%`
-                                    : `${change}%`}{' '}
-                                past 10 years
+                                {formattedChange}
                             </p>
                         </CardContent>
                     </Card>
