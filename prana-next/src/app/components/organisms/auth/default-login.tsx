@@ -82,16 +82,16 @@ export default function DefaultLogin() {
                 </Link>
                 <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
                     <div className="absolute inset-0" />
-                    <div className="relative z-20 flex items-center text-lg font-medium">
+                    {/* <div className="relative z-20 flex items-center text-lg font-medium">
                         <div className="logo">
                             <Image
                                 src="/logo.png"
                                 alt="Logo"
-                                width={35}
-                                height={35}
+                                width={60}
+                                height={60}
                             />
                         </div>
-                    </div>
+                    </div> */}
                     <div className="relative z-20 mt-auto">
                         <blockquote className="space-y-2">
                             <p className="text-lg">
