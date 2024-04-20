@@ -19,14 +19,29 @@ export default function About() {
                         description="Create software that enables individuals and entities to explore and understand biodiversity around the world in ways that were never before possible. Democratize our understanding of biodiversity conservation."
                     />
                     <MissionCard
+                        emoji="🔗"
+                        title="Connect"
+                        description="Bring people and organizations closer together in the fight to preserve our natural world. Empowering everyone for the greater good."
+                    />
+                    <MissionCard
+                        emoji="💸"
+                        title="Finance"
+                        description="Prana aims to make it easier than ever to find worthy causes, donate towards them, and track the impact of your contributions over time."
+                    />
+                    <MissionCard
                         emoji="🛡️"
                         title="Protect"
-                        description="Protect all forms of life from the harsh impacts of pollution, habitat loss, and climate change. Prana aims to make it easier than ever to find worthy causes, donate towards them, and track the impact of your contributions over time."
+                        description="Protect all forms of life from the harsh impacts of pollution, habitat loss, and climate change."
                     />
                     <MissionCard
                         emoji="🏆"
                         title="Reward"
                         description="Bring exciting rewards for users and organizations, such as badges and monthly spotlights, which can be in-turn shared and linked on external sites to promote biodiversity conservation."
+                    />
+                    <MissionCard
+                        emoji="📢"
+                        title="Promote"
+                        description="Bring vital awareness to the critical loss of biodiversity happening on earth. Encourage others to join the fight."
                     />
                 </div>
             </div>

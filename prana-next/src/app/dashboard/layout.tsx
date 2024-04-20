@@ -51,19 +51,19 @@ const DashboardLayout = ({
                                         value="research"
                                         disabled
                                     >
-                                        Research & News
+                                        Research & News 🔜
                                     </TabsTrigger>
                                     <TabsTrigger
                                         value="take-action"
                                         disabled
                                     >
-                                        Take Action
+                                        Take Action 🔜
                                     </TabsTrigger>
                                     <TabsTrigger
                                         value="my-impact"
                                         disabled
                                     >
-                                        My Impact
+                                        My Impact 🔜
                                     </TabsTrigger>
                                 </TabsList>
                                 <DashboardFilters />

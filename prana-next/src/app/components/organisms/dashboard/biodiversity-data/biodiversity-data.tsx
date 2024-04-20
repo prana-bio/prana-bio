@@ -15,39 +15,6 @@ import { useFetch } from '@/app/nucleus/hooks/common/useFetch';
 import { useDashboardFilters } from '@/app/nucleus/context/dashboard-provider';
 import { Icons } from '@/app/components/atoms/icons';
 
-// replace this with useFetch and get species for selected country
-// use useDashboardFilters country to filter in fetch
-const taxons = [
-    {
-        id: 'TAXON-8782',
-        title: 'African Rhino',
-        kingdom: 'animalia',
-        label: 'favorite',
-        status: 'endangered',
-    },
-    {
-        id: 'TAXON-7878',
-        title: 'Alaotra Reed Lemur',
-        kingdom: 'animalia',
-        label: 'favorite',
-        status: 'critically-endangered',
-    },
-    {
-        id: 'TAXON-7348',
-        title: 'Great Hammerhead',
-        kingdom: 'animalia',
-        label: 'favorite',
-        status: 'critically-endangered',
-    },
-    {
-        id: 'TAXON-7278',
-        title: 'Wandering Albatross',
-        kingdom: 'animalia',
-        label: 'favorite',
-        status: 'vulnerable',
-    },
-];
-
 const BiodiversityData: React.FC = () => {
     const { dashboardFilters } = useDashboardFilters();
     const countryId = dashboardFilters.country?.country_id;
@@ -70,7 +37,9 @@ const BiodiversityData: React.FC = () => {
             </p>
             <div className="hidden h-full flex-1 flex-col space-y-8 md:flex">
                 {isLoading ? (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    <div className="shadow-md flex justify-center items-center">
+                        <Icons.spinner className="animate-spin h-12 w-12 m-14 text-primary" />
+                    </div>
                 ) : (
                     <DataTable
                         //   data={taxons}

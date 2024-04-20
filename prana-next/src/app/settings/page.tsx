@@ -9,8 +9,7 @@ export default function SettingsProfilePage() {
                     Profile
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                    This is how others will see you on the
-                    site.
+                    Customize your public profile details.
                 </p>
             </div>
             <Separator />

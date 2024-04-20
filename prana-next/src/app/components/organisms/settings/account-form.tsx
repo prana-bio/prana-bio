@@ -160,7 +160,7 @@ export function AccountForm() {
                         </FormItem>
                     )}
                 />
-                <FormField
+                {/* <FormField
                     control={form.control}
                     name="language"
                     render={({ field }) => (
@@ -244,7 +244,7 @@ export function AccountForm() {
                             <FormMessage />
                         </FormItem>
                     )}
-                />
+                /> */}
                 <Button type="submit">
                     Update account
                 </Button>

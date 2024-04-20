@@ -56,7 +56,7 @@ export function middleware(request: NextRequest) {
     //  style-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://api.mapbox.com;
     const cspHeader = `
     connect-src 'self' https://api.mapbox.com https://events.mapbox.com ws://127.0.0.1:56250/;
-    img-src 'self' blob: data: images.unsplash.com https://api.mapbox.com https://avatar.vercel.sh https://jjnvksli2dfyjtqc.public.blob.vercel-storage.com;
+    img-src 'self' blob: data: images.unsplash.com https://api.mapbox.com https://avatar.vercel.sh https://jjnvksli2dfyjtqc.public.blob.vercel-storage.com postimg.cc;
     font-src 'self';
     object-src 'none';
     base-uri 'self';

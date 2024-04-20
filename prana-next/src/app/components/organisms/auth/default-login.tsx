@@ -47,11 +47,11 @@ export default function DefaultLogin() {
                 @keyframes floatPulse {
                     0%,
                     100% {
-                        transform: translateY(-1px) scale(1)
-                            rotateY(0deg);
+                        transform: translateY(-0.25px)
+                            scale(1) rotateY(0deg);
                     }
                     50% {
-                        transform: translateY(3px)
+                        transform: translateY(1px)
                             scale(1.1) rotateY(5deg);
                     }
                 }
@@ -60,33 +60,16 @@ export default function DefaultLogin() {
                         infinite;
                     display: block;
                     filter: drop-shadow(
-                        5px 5px 5px rgba(0, 0, 0, 0.5)
-                    ); /* Example shadow: horizontal offset, vertical offset, blur radius, color */
+                        2px 2px 5px rgba(0, 0, 0, 0.35)
+                    );
                 }
             `}</style>
-            <div className="md:hidden">
-                {/* <Image
-                    src="/orca.jpg"
-                    width={1280}
-                    height={843}
-                    alt="Authentication"
-                    className="block dark:hidden h-screen object-cover"
-                /> */}
-                {/* <Image
-                    src="/logo.png"
-                    width={180}
-                    height={843}
-                    alt="Authentication"
-                    className=" h-screen object-cover"
-                /> */}
-                <Image
-                    src="/orca.jpg"
-                    alt="Logo"
-                    width={500}
-                    height={500}
-                />
-            </div>
-            <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+            {/* <div className="md:hidden"></div> */}
+            <div
+                className="container relative flex h-screen flex-col items-center justify-center w-full px-4 
+                           sm:w-auto sm:grid md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
+                // bg-[url('https://i.postimg.cc/2ydqfbyN/git-header.png')] bg-cover bg-center bg-fixed
+            >
                 <Link
                     href="/sign-up"
                     className={cn(
@@ -98,19 +81,18 @@ export default function DefaultLogin() {
                 >
                     Create Account
                 </Link>
-                <div className="relative hidden h-full flex-col bg-muted p-10  dark:border-r lg:flex">
+                <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
                     <div className="absolute inset-0" />
                     <div className="relative z-20 flex items-center text-lg font-medium">
                         <div className="logo">
                             <Image
-                                src="/file2.png"
+                                src="/logo.png"
                                 alt="Logo"
-                                width={60}
-                                height={60}
+                                width={50}
+                                height={50}
                             />
                         </div>
                     </div>
-
                     <div className="relative z-20 mt-auto">
                         <blockquote className="space-y-2">
                             <p className="text-lg">
@@ -152,7 +134,6 @@ export default function DefaultLogin() {
                             onError={(err) => push('/')}
                         />
                         <p className="px-8 text-center text-sm text-muted-foreground">
-                            {/* In{' '} */}
                             <span className="font-semibold text-foreground">
                                 Version 0.1.0
                             </span>{' '}

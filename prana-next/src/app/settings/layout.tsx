@@ -17,10 +17,10 @@ const sidebarNavItems = [
         title: 'Account',
         href: '/settings/account',
     },
-    {
-        title: 'Payments',
-        href: '/settings/payments',
-    },
+   //  {
+   //      title: 'Payments',
+   //      href: '/settings/payments',
+   //  },
     //  {
     //      title: 'Notifications',
     //      href: '/settings/notifications',
@@ -57,8 +57,7 @@ const SettingsLayout = ({
                         Settings
                     </h2>
                     <p className="text-muted-foreground text-sm">
-                        Manage your account settings and set
-                        e-mail preferences.
+                        Manage your Prana settings.
                     </p>
                 </div>
                 <Separator className="my-6" />

@@ -97,7 +97,7 @@ export default function AuthenticationPage() {
                     <div className="relative z-20 flex items-center text-lg font-medium">
                         <div className="logo">
                             <Image
-                                src="/file2.png"
+                                src="/logo.png"
                                 alt="Logo"
                                 width={50}
                                 height={50}

@@ -172,7 +172,9 @@ const Dashboard: React.FC = () => {
                     </CardHeader>
                     <CardContent className="pl-2">
                         {biodiversityRankingLoading ? (
-                            <Icons.spinner className="animate-spin h-8 w-8 m-4 text-primary" />
+                            <div className="shadow-md flex justify-center items-center">
+                                <Icons.spinner className="animate-spin h-8 w-8 m-14 text-primary" />
+                            </div>
                         ) : (
                             <BiodiversityRankingChart
                                 biodiversityRanking={
@@ -205,7 +207,7 @@ const Dashboard: React.FC = () => {
                             Explore the surrounding areas.
                         </CardDescription> */}
                     </CardHeader>
-                    <CardContent >
+                    <CardContent>
                         {/* <ContributionHistory /> */}
                         <BiodiversityMap />
                     </CardContent>
