@@ -68,7 +68,6 @@ export default function DefaultLogin() {
             <div
                 className="container relative flex h-screen flex-col items-center justify-center w-full px-4 
                            sm:w-auto sm:grid md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
-                // bg-[url('https://i.postimg.cc/2ydqfbyN/git-header.png')] bg-cover bg-center bg-fixed
             >
                 <Link
                     href="/sign-up"
@@ -88,8 +87,8 @@ export default function DefaultLogin() {
                             <Image
                                 src="/logo.png"
                                 alt="Logo"
-                                width={50}
-                                height={50}
+                                width={35}
+                                height={35}
                             />
                         </div>
                     </div>
