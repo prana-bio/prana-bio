@@ -14,7 +14,7 @@ export default function ReleaseTimeline() {
                 <div className="flex flex-col space-y-4">
                     <TimelineItem
                         date="2024-04-20"
-                        title="Version 0.1 Release"
+                        title="Version 0.1 Release 🐣"
                         description="Initial beta release for Earth Day 2024."
                     />
                 </div>

@@ -131,13 +131,17 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6 pt-2">
                 <Card
-                    className={`sm:col-span-7 md:col-span-4 lg:col-span-3 shadow-md cursor-pointer ${
+                    className={`sm:col-span-7 md:col-span-4 lg:col-span-3 cursor-pointer ${
                         isBiodiversityRankSelected
-                            ? theme == 'dark'
-                                ? 'border-2 border-gray-100'
-                                : 'border-2 border-gray-400'
-                            : 'hover:border-gray-200'
-                    }`}
+                            ? theme === 'dark'
+                                ? 'border-2 border-gray-100 shadow-glowWhite'
+                                : 'border-2 border-gray-400 shadow-glowGray'
+                            : `border-2 border-transparent ${
+                                  theme === 'dark'
+                                      ? 'hover:border-gray-400 hover:shadow-glowWhite'
+                                      : 'hover:border-gray-200 hover:shadow-glowGray'
+                              }`
+                    } rounded-xl transition duration-150 ease-in-out`}
                     onClick={() => {
                         updatePropertySelected(
                             'biodiversity_rank',

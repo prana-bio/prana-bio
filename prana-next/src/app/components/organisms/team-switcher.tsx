@@ -64,7 +64,9 @@ export default function TeamSwitcher({
     const getDisplayValue = () => {
         if (!selectedTenant) return 'Select a tenant';
         if (selectedTenant.type === 'Personal')
-            return userSession.user.full_name;
+            return userSession.user.full_name?.split(
+                ' ',
+            )[0];
         return selectedTenant.name;
     };
 
@@ -107,7 +109,7 @@ export default function TeamSwitcher({
                         aria-expanded={open}
                         aria-label="Select a tenant"
                         className={cn(
-                            'w-[200px] justify-between',
+                            'w-auto justify-between',
                             className,
                         )}
                     >
@@ -126,7 +128,7 @@ export default function TeamSwitcher({
                         </Avatar>
                         {getDisplayValue() ||
                             selectedTenant?.name}
-                        <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+                        <CaretSortIcon className="ml-4 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[200px] p-0">
@@ -232,7 +234,7 @@ export default function TeamSwitcher({
                                     ))}
                             </CommandGroup>
                         </CommandList>
-                        <CommandItem
+                        {/* <CommandItem
                             onSelect={() =>
                                 setShowCreateTenantDialog(
                                     true,
@@ -241,7 +243,7 @@ export default function TeamSwitcher({
                         >
                             <PlusCircledIcon className="mr-2" />
                             Create Organization
-                        </CommandItem>
+                        </CommandItem> */}
                     </Command>
                 </PopoverContent>
             </Popover>
@@ -253,7 +255,9 @@ export default function TeamSwitcher({
                     </DialogTitle>
                     <DialogDescription>
                         Add a new organization to manage
-                        your activity and contributions.
+                        your activity, and in a future
+                        version of this app, your
+                        contributions and rewards.
                     </DialogDescription>
                 </DialogHeader>
                 <div>
@@ -267,7 +271,7 @@ export default function TeamSwitcher({
                                 placeholder="My organization"
                             />
                         </div>
-                        <div className="space-y-2">
+                        {/* <div className="space-y-2">
                             <Label htmlFor="plan">
                                 Subscription plan
                             </Label>
@@ -298,7 +302,7 @@ export default function TeamSwitcher({
                                     </SelectItem>
                                 </SelectContent>
                             </Select>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <DialogFooter>

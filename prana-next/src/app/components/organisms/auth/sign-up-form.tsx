@@ -90,15 +90,14 @@ export function SignUpForm({
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl flex items-center justify-between">
                         <span className="align-middle">
-                            Join the Club 🪻
+                            Join the Club 🐟
                         </span>
                     </CardTitle>
                     <CardDescription>
-                        Choose how you sign up, and take
-                        action now.
+                        Sign up and start exploring.
                     </CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-4">
+                <CardContent className="grid gap-4 pt-2">
                     {/* <div className="grid grid-cols-2 gap-6">
                         <Button
                             variant="outline"
@@ -140,6 +139,7 @@ export function SignUpForm({
                             autoComplete="on"
                             autoCorrect="off"
                             disabled={isLoading}
+                            className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
                         />
                     </div>
                     <div className="grid gap-2">
@@ -155,6 +155,7 @@ export function SignUpForm({
                             autoComplete="on"
                             autoCorrect="off"
                             disabled={isLoading}
+                            className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
                         />
                     </div>
                     <div className="grid gap-2">
@@ -172,12 +173,13 @@ export function SignUpForm({
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={isLoading}
+                            className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
                         />
                     </div>
                 </CardContent>
                 <CardFooter>
                     <Button
-                        className="w-full"
+                        className="w-full hover:text-primary hover:outline-dashed"
                         disabled={isLoading}
                         type="submit"
                     >

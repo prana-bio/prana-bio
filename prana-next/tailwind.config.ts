@@ -3,6 +3,7 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: ['class'],
+    mode: 'jit',
     content: [
         './pages/**/*.{ts,tsx}',
         './components/**/*.{ts,tsx}',
@@ -23,6 +24,11 @@ module.exports = {
                     'var(--font-sans)',
                     ...fontFamily.sans,
                 ],
+            },
+            boxShadow: {
+                glow: '0 0 8px rgba(66, 104, 39, .75)',
+                glowGray: '0 0 8px rgba(31, 41, 55, 1)',
+                glowWhite: '0 0 8px rgba(249, 250, 251, 1)',
             },
             colors: {
                 border: 'hsl(var(--border))',

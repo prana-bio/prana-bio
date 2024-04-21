@@ -43,28 +43,7 @@ export default function AuthenticationPage() {
 
     return (
         <>
-            <style jsx>{`
-                @keyframes floatPulse {
-                    0%,
-                    100% {
-                        transform: translateY(-1px) scale(1)
-                            rotateY(0deg);
-                    }
-                    50% {
-                        transform: translateY(3px)
-                            scale(1.1) rotateY(5deg);
-                    }
-                }
-                .logo {
-                    animation: floatPulse 3s ease-in-out
-                        infinite;
-                    display: block;
-                    filter: drop-shadow(
-                        5px 5px 5px rgba(0, 0, 0, 0.5)
-                    ); /* Example shadow: horizontal offset, vertical offset, blur radius, color */
-                }
-            `}</style>
-            <div className="md:hidden">
+            {/* <div className="md:hidden">
                 <Image
                     src="/dakota.jpg"
                     width={1280}
@@ -79,8 +58,12 @@ export default function AuthenticationPage() {
                     alt="Authentication"
                     className="hidden dark:block h-screen object-cover"
                 />
-            </div>
-            <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+            </div> */}
+            {/* <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"> */}
+            <div
+                className="container relative flex h-screen flex-col items-center justify-center w-full px-4 
+                           sm:w-auto sm:grid md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 "
+            >
                 <Link
                     href="/"
                     className={cn(
@@ -92,36 +75,37 @@ export default function AuthenticationPage() {
                 >
                     Login
                 </Link>
-                <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
-                    <div className="absolute inset-0" />
+                <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex ">
+                    {/* <div className="absolute inset-0" />
                     <div className="relative z-20 flex items-center text-lg font-medium">
-                        <div className="logo">
-                            <Image
-                                src="/logo.png"
-                                alt="Logo"
-                                width={35}
-                                height={35}
-                            />
-                        </div>
-                    </div>
+                        <span className="text-2xl pr-2">
+                            🦣
+                        </span>{' '}
+                        Prana
+                    </div> */}
                     <div className="relative z-20 mt-auto">
                         <blockquote className="space-y-2">
                             <p className="text-lg">
-                                &ldquo;Brace yourself: Over
-                                1 million species are
-                                teetering on the brink of
-                                extinction. Identify,
-                                protect, and be a hero for a
-                                thriving planet. Ready to
-                                make a difference? Prana
-                                awaits your eco-adventure.
-                                You can amplify your impact
-                                by taking action or
-                                contributing to protection
-                                efforts.&rdquo;
+                                The axolotl, a unique
+                                species of salamander found
+                                only in the lakes of
+                                Xochimilco near Mexico City,
+                                has the extraordinary
+                                ability to regenerate not
+                                only its limbs but also its
+                                heart and other vital
+                                organs. Protecting axolotls
+                                helps preserve this
+                                remarkable trait, which has
+                                significant potential for
+                                scientific and medical
+                                research, highlighting the
+                                importance of biodiversity
+                                conservation.
                             </p>
-                            <footer className="text-sm">
-                                -Connor Barrett
+                            <footer className="text-sm  italic">
+                                Biodiversity Fact of the Day
+                                - April 21st, 2024
                             </footer>
                         </blockquote>
                     </div>
@@ -137,6 +121,12 @@ export default function AuthenticationPage() {
                             }
                         />
                         <p className="px-8 text-center text-sm text-muted-foreground">
+                            <span className="font-md text-foreground">
+                                Version 0.1
+                            </span>{' '}
+                            available as of 4.22.24 🐣
+                        </p>
+                        {/* <p className="px-8 text-center text-sm text-muted-foreground">
                             By clicking continue, you agree
                             to our{' '}
                             <Link
@@ -153,7 +143,7 @@ export default function AuthenticationPage() {
                                 Privacy Policy
                             </Link>
                             .
-                        </p>
+                        </p> */}
                     </div>
                     <div className="absolute bottom-4 right-4">
                         <ThemeToggle />

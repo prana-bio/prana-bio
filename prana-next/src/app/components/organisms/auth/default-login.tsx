@@ -95,24 +95,26 @@ export default function DefaultLogin() {
                     <div className="relative z-20 mt-auto">
                         <blockquote className="space-y-2">
                             <p className="text-lg">
-                                &ldquo;Biodiversity is the
-                                symphony of life, a melodic
-                                ensemble of species and
-                                habitats that weave together
-                                a tapestry more stunning
-                                than the threads of any
-                                single creature. As each
-                                note resonates with the
-                                next, let us join in harmony
-                                to protect this precious
-                                orchestra, for in its music
-                                lies the warmth of the
-                                world&apos;s heart, beating
-                                in rhythm with our
-                                own.&rdquo;
+                                The axolotl, a unique
+                                species of salamander found
+                                only in the lakes of
+                                Xochimilco near Mexico City,
+                                has the extraordinary
+                                ability to regenerate not
+                                only its limbs but also its
+                                heart and other vital
+                                organs. Protecting axolotls
+                                helps preserve this
+                                remarkable trait, which has
+                                significant potential for
+                                scientific and medical
+                                research, highlighting the
+                                importance of biodiversity
+                                conservation.
                             </p>
-                            <footer className="text-sm">
-                                - Prana Development Team
+                            <footer className="text-sm  italic">
+                                Biodiversity Fact of the Day
+                                - April 21st, 2024
                             </footer>
                         </blockquote>
                     </div>
@@ -121,7 +123,8 @@ export default function DefaultLogin() {
                     <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
                         <div className="flex flex-col space-y-2 text-center">
                             <h1 className="text-2xl font-semibold tracking-tight">
-                                Welcome back {` 🐳`}
+                                Welcome back to Prana{' '}
+                                {` 🦥 `}
                             </h1>
                             <p className="text-sm text-muted-foreground">
                                 Sign in with your email
@@ -133,10 +136,10 @@ export default function DefaultLogin() {
                             onError={(err) => push('/')}
                         />
                         <p className="px-8 text-center text-sm text-muted-foreground">
-                            <span className="font-semibold text-foreground">
+                            <span className="font-md text-foreground">
                                 Version 0.1
                             </span>{' '}
-                            available as of 4.22.24 🚀
+                            available as of 4.22.24 🐣
                         </p>
                     </div>
                     <div className="absolute bottom-4 right-4">

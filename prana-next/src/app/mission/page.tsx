@@ -1,5 +1,6 @@
+'use client';
 import * as React from 'react';
-import { Icons } from '@/app/components/atoms/icons';
+import { useTheme } from 'next-themes';
 import {
     Card,
     CardHeader,
@@ -50,8 +51,18 @@ export default function About() {
 }
 
 function MissionCard({ emoji, title, description }: any) {
+    const { theme } = useTheme();
+
     return (
-        <Card className="flex flex-col justify-between h-full">
+        <Card
+            className={`flex flex-col justify-between h-full transition duration-300 ease-in-out 
+    hover:border-2 ${
+        theme === 'dark'
+            ? 'hover:border-gray-100 hover:shadow-glowWhite'
+            : 'hover:border-gray-200 hover:shadow-glowGray'
+    } hover:cursor-pointer`}
+        >
+            {' '}
             <CardHeader>
                 <div className="text-3xl text-center mb-4">
                     {emoji}

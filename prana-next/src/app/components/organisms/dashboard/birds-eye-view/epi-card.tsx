@@ -41,10 +41,14 @@ const EPICard: React.FC<EPICardProps> = ({
             onClick={onClick}
             className={`${
                 isSelected
-                    ? theme == 'dark'
-                        ? 'border-2 border-gray-100'
-                        : 'border-2 border-gray-400'
-                    : 'border border-transparent hover:border-gray-200'
+                    ? theme === 'dark'
+                        ? 'border-2 border-gray-100 shadow-glowWhite'
+                        : 'border-2 border-gray-400 shadow-glowGray'
+                    : `border-2 border-transparent ${
+                          theme === 'dark'
+                              ? 'hover:border-gray-400 hover:shadow-glowWhite'
+                              : 'hover:border-gray-200 hover:shadow-glowGray'
+                      }`
             } rounded-xl transition duration-150 ease-in-out`}
         >
             {loading ? (
@@ -53,7 +57,7 @@ const EPICard: React.FC<EPICardProps> = ({
                 </Card>
             ) : (
                 <HoverCard>
-                    <Card className="shadow-md flex flex-col justify-between min-h-[140px] cursor-pointer">
+                    <Card className="shadow-md flex flex-col justify-between min-h-[100px] cursor-pointer">
                         <CardHeader className="flex flex-row justify-between items-top space-y-0 pb-2">
                             <HoverCardTrigger>
                                 <CardTitle className="font-medium text-xs cursor-pointer">
