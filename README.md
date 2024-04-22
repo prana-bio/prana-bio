@@ -8,7 +8,7 @@
 
 ## Mission
 
-**Prana** is technology platform for exploring, tracking, and protecting biodiversity on earth. 
+**Prana** is for exploring, tracking, and protecting biodiversity on earth. 
 
 - Right now, it gathers, organizes, aggregates, and surfaces insights from relevant public datasets so that users are brought closer than ever to the issue of biodiversity loss. 
 - In the future, it aims to connect users with conservation organizations, enable them to purchase biodiversity protection credits, track their impact and earn rewards, all within our first-class assurance and visibility system.
