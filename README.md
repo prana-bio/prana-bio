@@ -37,9 +37,6 @@
 Nile provides serverless, tenant virtualized data storage to enable SaaS.
 
 
-##### Screenshots
+##### Demo
 
-<img width="900" alt="image" src="https://github.com/prana-bio/prana-bio/assets/22532948/ef4f9e9c-1345-4594-a593-d6b108363b25">
-<img width="900" alt="image" src="https://github.com/prana-bio/prana-bio/assets/22532948/9294785f-1c70-4c16-937c-c5ee1a243761">
-
-
+![demo-compressed](https://github.com/prana-bio/prana-bio/assets/22532948/0deb4b7f-0101-4908-bb77-6cd8b711fc6b)
