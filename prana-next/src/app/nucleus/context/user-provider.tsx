@@ -29,6 +29,7 @@ export const UserSessionProvider = ({
 }: UserSessionProviderProps) => {
     const [userSession, setUserSession] =
         useState<UserSession>(defaultUserSession);
+    console.log('us: ', userSession);
     useEffect(() => {
         const fetchUserSession = async () => {
             try {
@@ -61,12 +62,30 @@ export const UserSessionProvider = ({
             | UserSession
             | ((prevSession: UserSession) => UserSession),
     ) => {
+        const updateLocalStorage = (
+            session: UserSession,
+        ) => {
+            const tenantId = session.selectedTenant?.id;
+            if (tenantId) {
+                localStorage.setItem(
+                    'selectedTenantId',
+                    tenantId,
+                );
+            } else {
+                localStorage.removeItem('selectedTenantId');
+            }
+        };
+
         if (typeof userSessionUpdates === 'function') {
-            setUserSession((prevSession) =>
-                userSessionUpdates(prevSession),
-            );
+            setUserSession((prevSession) => {
+                const updatedSession =
+                    userSessionUpdates(prevSession);
+                updateLocalStorage(updatedSession);
+                return updatedSession;
+            });
         } else {
             setUserSession(userSessionUpdates);
+            updateLocalStorage(userSessionUpdates);
         }
     };
 

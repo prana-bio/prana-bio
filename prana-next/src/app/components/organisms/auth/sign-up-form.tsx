@@ -179,7 +179,7 @@ export function SignUpForm({
                 </CardContent>
                 <CardFooter>
                     <Button
-                        className="w-full hover:text-primary hover:outline-dashed"
+                        className="w-full hover:text-primary hover:bg-transparent hover:outline-dashed"
                         disabled={isLoading}
                         type="submit"
                     >

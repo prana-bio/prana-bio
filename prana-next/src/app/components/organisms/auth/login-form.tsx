@@ -123,7 +123,7 @@ export function LogInForm({
                     </div>
                     <Button
                         variant="default"
-                        className={`mt-4 hover:text-primary hover:outline-dashed`}
+                        className={`mt-4 hover:text-primary hover:bg-transparent hover:outline-dashed`}
                         disabled={isLoading}
                         type="submit"
                     >

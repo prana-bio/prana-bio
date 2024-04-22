@@ -57,7 +57,7 @@ const EPICard: React.FC<EPICardProps> = ({
                 </Card>
             ) : (
                 <HoverCard>
-                    <Card className="shadow-md flex flex-col justify-between min-h-[100px] cursor-pointer">
+                    <Card className="shadow-md flex flex-col justify-between min-h-[140px] cursor-pointer">
                         <CardHeader className="flex flex-row justify-between items-top space-y-0 pb-2">
                             <HoverCardTrigger>
                                 <CardTitle className="font-medium text-xs cursor-pointer">

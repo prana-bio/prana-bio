@@ -55,7 +55,9 @@ interface TeamSwitcherProps extends PopoverTriggerProps {}
 export default function TeamSwitcher({
     className,
 }: TeamSwitcherProps) {
-    const { userSession } = useUserSession();
+    const { userSession, updateUserSession } =
+        useUserSession();
+
     // State to manage the currently selected tenant.
     const [selectedTenant, setSelectedTenant] =
         React.useState(userSession.selectedTenant);
@@ -85,12 +87,12 @@ export default function TeamSwitcher({
 
     // Handler for tenant selection.
     const handleTenantSelect = (tenant: Tenant) => {
-        setSelectedTenant(tenant);
+        //   setSelectedTenant(tenant);
+        updateUserSession({
+            ...userSession,
+            selectedTenant: tenant,
+        }); // Update context instead of local state
         setOpen(false);
-        localStorage.setItem(
-            'selectedTenantId',
-            tenant.id || '',
-        );
     };
 
     if (!userSession) {
