@@ -95,7 +95,7 @@ const Dashboard: React.FC = () => {
                 Track our progress towards biodiversity
                 conservation around the world.
             </p>
-            <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-6">
+            <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-6">
                 {EPIDisplayData &&
                     EPIDisplayData.map(
                         (EPI: EPI, index: number) => (
