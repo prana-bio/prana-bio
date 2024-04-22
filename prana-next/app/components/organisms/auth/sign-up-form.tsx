@@ -6,27 +6,36 @@ import React, {
     FormEvent,
 } from 'react';
 
-import { cn } from '@/app/nucleus/utils';
 import { Icons } from '@/app/components/atoms/icons';
 import { Button } from '@/app/components/molecules/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/app/components/molecules/card';
 import { Input } from '@/app/components/atoms/input';
 import { Label } from '@/app/components/molecules/label';
 
-interface UserLoginFormProps {
+interface UserSignUpFormProps {
     onSuccess: (response: any) => void;
     onError: (error: any) => void;
 }
 
 interface FormData {
+    fullName: string;
     email: string;
     password: string;
 }
 
-export function LogInForm({
+export function SignUpForm({
     onSuccess,
     onError,
-}: UserLoginFormProps) {
+}: UserSignUpFormProps) {
     const [formData, setFormData] = useState<FormData>({
+        fullName: '',
         email: '',
         password: '',
     });
@@ -50,7 +59,7 @@ export function LogInForm({
         setIsLoading(true);
 
         try {
-            const response = await fetch('/api/login', {
+            const response = await fetch('/api/sign-up', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,16 +85,65 @@ export function LogInForm({
     };
 
     return (
-        <div className={cn('grid gap-6')}>
-            <form onSubmit={handleSubmit}>
-                <div className="grid gap-2">
-                    <div className="grid gap-1">
-                        <Label
-                            className="mb-1"
-                            htmlFor="email"
+        <form onSubmit={handleSubmit}>
+            <Card>
+                <CardHeader className="space-y-1">
+                    <CardTitle className="text-2xl flex items-center justify-between">
+                        <span className="align-middle">
+                            Join the Club 🐟
+                        </span>
+                    </CardTitle>
+                    <CardDescription>
+                        Sign up and start exploring.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4 pt-2">
+                    {/* <div className="grid grid-cols-2 gap-6">
+                        <Button
+                            variant="outline"
+                            disabled={true}
                         >
-                            Email
+                            <Icons.gitHub className="mr-2 h-4 w-4" />
+                            Github
+                        </Button>
+                        <Button
+                            variant="outline"
+                            disabled={true}
+                        >
+                            <Icons.google className="mr-2 h-4 w-4" />
+                            Google
+                        </Button>
+                    </div> */}
+                    {/* <div className="relative">
+                        <div className="absolute inset-0 flex items-center">
+                            <span className="w-full border-t" />
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase">
+                            <span className="bg-background px-2 text-muted-foreground">
+                                Or continue with
+                            </span>
+                        </div>
+                    </div> */}
+                    <div className="grid gap-2">
+                        <Label htmlFor="fullName">
+                            Full Name
                         </Label>
+                        <Input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            placeholder="Enter your Full Name"
+                            autoCapitalize="words"
+                            autoComplete="on"
+                            autoCorrect="off"
+                            disabled={isLoading}
+                            className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
+                        />
+                    </div>
+                    <div className="grid gap-2">
+                        <Label htmlFor="email">Email</Label>
                         <Input
                             type="email"
                             id="email"
@@ -100,11 +158,8 @@ export function LogInForm({
                             className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
                         />
                     </div>
-                    <div className="grid gap-1">
-                        <Label
-                            className="mb-1 mt-2"
-                            htmlFor="password"
-                        >
+                    <div className="grid gap-2">
+                        <Label htmlFor="password">
                             Password
                         </Label>
                         <Input
@@ -121,41 +176,20 @@ export function LogInForm({
                             className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
                         />
                     </div>
+                </CardContent>
+                <CardFooter>
                     <Button
-                        variant="default"
-                        className={`mt-4 hover:text-primary hover:outline-dashed`}
+                        className="w-full hover:text-primary hover:bg-transparent hover:outline-dashed"
                         disabled={isLoading}
                         type="submit"
                     >
                         {isLoading && (
                             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                         )}
-                        Sign In
+                        Create account
                     </Button>
-                </div>
-            </form>
-            {/* <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">
-                        Or continue with
-                    </span>
-                </div>
-            </div>
-            <Button
-                variant="outline"
-                type="button"
-                disabled={true}
-            >
-                {isLoading ? (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                <Icons.gitHub className="mr-2 h-4 w-4" />
-                )}{' '}
-                Github
-            </Button> */}
-        </div>
+                </CardFooter>
+            </Card>
+        </form>
     );
 }

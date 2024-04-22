@@ -42,7 +42,7 @@ export async function GET(
 
         // Fetch tenant data and roles
         const tenantQuery = `
-            SELECT tenants.*, tenant_users.roles
+            SELECT tenants.*, tenant_users.roles, tenant_users.default_tenant
             FROM public.tenants
             LEFT JOIN users.tenant_users ON tenant_users.tenant_id = tenants.id
             WHERE tenant_users.user_id = $1
