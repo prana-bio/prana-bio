@@ -17,10 +17,14 @@ const sidebarNavItems = [
         title: 'Account',
         href: '/settings/account',
     },
-   //  {
-   //      title: 'Payments',
-   //      href: '/settings/payments',
-   //  },
+    {
+        title: 'Organizations',
+        href: '/settings/organizations',
+    },
+    //  {
+    //      title: 'Payments',
+    //      href: '/settings/payments',
+    //  },
     //  {
     //      title: 'Notifications',
     //      href: '/settings/notifications',
