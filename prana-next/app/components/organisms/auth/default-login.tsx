@@ -44,6 +44,12 @@ export default function DefaultLogin() {
     return (
         <>
             <style jsx>{`
+                //  .container {
+                //      background-image: url('/orca.jpg'); /* Path to your image */
+                //      background-size: cover; /* Cover the entire area of the container */
+                //      background-position: center; /* Center the background image */
+                //      background-repeat: no-repeat; /* Do not repeat the image */
+                //  }
                 @keyframes floatPulse {
                     0%,
                     100% {
@@ -80,18 +86,10 @@ export default function DefaultLogin() {
                 >
                     Create Account
                 </Link>
-                <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
-                    <div className="absolute inset-0" />
-                    {/* <div className="relative z-20 flex items-center text-lg font-medium">
-                        <div className="logo">
-                            <Image
-                                src="/logo.png"
-                                alt="Logo"
-                                width={60}
-                                height={60}
-                            />
-                        </div>
-                    </div> */}
+                <div className="relative hidden h-full flex-col bg-login-pattern bg-size-100 bg-slightly-below-top bg-no-repeat p-10 dark:border-r lg:flex">
+                    <div className="relative z-20 flex items-center text-lg font-medium">
+                        prana bio
+                    </div>
                     <div className="relative z-20 mt-auto">
                         <blockquote className="space-y-2">
                             <p className="text-lg">
@@ -113,8 +111,8 @@ export default function DefaultLogin() {
                                 conservation.
                             </p>
                             <footer className="text-sm  italic">
-                                Biodiversity Fact of the Day
-                                - April 21st, 2024
+                                - Prana Curated Biodiversity
+                                Facts
                             </footer>
                         </blockquote>
                     </div>
@@ -123,8 +121,7 @@ export default function DefaultLogin() {
                     <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
                         <div className="flex flex-col space-y-2 text-center">
                             <h1 className="text-2xl font-semibold tracking-tight">
-                                Welcome back to Prana{' '}
-                                {` 🦥 `}
+                                hey, welcome back {` 🦥 `}
                             </h1>
                             <p className="text-sm text-muted-foreground">
                                 Sign in with your email

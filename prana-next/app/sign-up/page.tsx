@@ -75,14 +75,10 @@ export default function AuthenticationPage() {
                 >
                     Login
                 </Link>
-                <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex ">
-                    {/* <div className="absolute inset-0" />
+                <div className="relative hidden h-full flex-col bg-login-pattern bg-size-100 bg-slightly-below-top bg-no-repeat p-10 dark:border-r lg:flex">
                     <div className="relative z-20 flex items-center text-lg font-medium">
-                        <span className="text-2xl pr-2">
-                            🦣
-                        </span>{' '}
-                        Prana
-                    </div> */}
+                        prana bio
+                    </div>
                     <div className="relative z-20 mt-auto">
                         <blockquote className="space-y-2">
                             <p className="text-lg">
@@ -104,8 +100,9 @@ export default function AuthenticationPage() {
                                 conservation.
                             </p>
                             <footer className="text-sm  italic">
-                                Biodiversity Fact of the Day
-                                - April 21st, 2024
+                                - Prana Curated Biodiversity
+                                Facts
+                                {/* - April 21st, 2024 */}
                             </footer>
                         </blockquote>
                     </div>

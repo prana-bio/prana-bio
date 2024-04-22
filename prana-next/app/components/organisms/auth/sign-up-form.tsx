@@ -90,11 +90,11 @@ export function SignUpForm({
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl flex items-center justify-between">
                         <span className="align-middle">
-                            Join the Club 🐟
+                        join the mission 🌎
                         </span>
                     </CardTitle>
                     <CardDescription>
-                        Sign up and start exploring.
+                        Sign up and start exploring today.
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4 pt-2">

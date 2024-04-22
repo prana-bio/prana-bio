@@ -101,6 +101,15 @@ module.exports = {
                 'accordion-up':
                     'accordion-up 0.2s ease-out',
             },
+            backgroundImage: {
+                'login-pattern': "url('/logo.png')",
+            },
+            backgroundSize: {
+                'size-100': '350px 350px',
+            },
+            backgroundPosition: {
+                'slightly-below-top': 'center 5%',
+            },
         },
     },
     plugins: [require('tailwindcss-animate')],
