@@ -29,12 +29,17 @@
 ⚛️ [Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/) for a modular UI built up of atoms, molecules, organisms, layouts, and pages.
 ⚡ [Vitest](https://vitest.dev/) for unit testing components, hooks, and utilities.
 
-<img width="1100" alt="image" src="https://github.com/prana-bio/prana-bio/assets/22532948/9294785f-1c70-4c16-937c-c5ee1a243761">
-
 ##### Prana Engine - Background ETL
 - 🐍 [Python ](https://www.python.org/)for data collection, manipulation, aggregation.
 - 🗄️ [SQL](https://en.wikipedia.org/wiki/SQL) for reading and writing to PostgresDB.
 
 ##### Powered by [The Nile](https://www.thenile.dev/)
 Nile provides serverless, tenant virtualized data storage to enable SaaS.
+
+
+##### Screenshots
+
+<img width="900" alt="image" src="https://github.com/prana-bio/prana-bio/assets/22532948/ef4f9e9c-1345-4594-a593-d6b108363b25">
+<img width="900" alt="image" src="https://github.com/prana-bio/prana-bio/assets/22532948/9294785f-1c70-4c16-937c-c5ee1a243761">
+
 
