@@ -105,7 +105,7 @@ module.exports = {
                 'login-pattern': "url('/logo.png')",
             },
             backgroundSize: {
-                'size-100': '350px 350px',
+                'size-100': '300px 300px',
             },
             backgroundPosition: {
                 'slightly-below-top': 'center 5%',
