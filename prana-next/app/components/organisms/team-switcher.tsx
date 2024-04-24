@@ -236,7 +236,7 @@ export default function TeamSwitcher({
                                     ))}
                             </CommandGroup>
                         </CommandList>
-                        {/* <CommandItem
+                        <CommandItem
                             onSelect={() =>
                                 setShowCreateTenantDialog(
                                     true,
@@ -245,7 +245,7 @@ export default function TeamSwitcher({
                         >
                             <PlusCircledIcon className="mr-2" />
                             Create Organization
-                        </CommandItem> */}
+                        </CommandItem>
                     </Command>
                 </PopoverContent>
             </Popover>
