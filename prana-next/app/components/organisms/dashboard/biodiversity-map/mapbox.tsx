@@ -38,8 +38,8 @@ const Mapbox: React.FC = () => {
                 //  style: `mapbox://styles/mapbox/outdoors-v12`,
                 style: `mapbox://styles/mapbox/${
                     theme === 'dark'
-                        ? 'dark-v11'
-                        : 'light-v11'
+                        ? 'light-v10'
+                        : 'light-v10'
                 }`,
                 center: [0, 0],
                 zoom: 0,
