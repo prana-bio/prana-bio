@@ -256,10 +256,9 @@ export default function TeamSwitcher({
                         Create organization
                     </DialogTitle>
                     <DialogDescription>
-                        Add a new organization to manage
-                        your activity, and in a future
-                        version of this app, your
-                        contributions and rewards.
+                        Add a new organization to track your
+                        organization's contributions and
+                        rewards centrally.
                     </DialogDescription>
                 </DialogHeader>
                 <div>
