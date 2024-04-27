@@ -54,7 +54,9 @@ type PopoverTriggerProps = React.ComponentPropsWithoutRef<
 interface TeamSwitcherProps extends PopoverTriggerProps {}
 
 const schema = z.object({
-    organizationName: z.string(),
+    organizationName: z.string().min(1, {
+        message: 'Organization name is required',
+    }),
     subscriptionType: z.string(),
 });
 
@@ -64,9 +66,62 @@ export default function TeamSwitcher({
     const { userSession, updateUserSession } =
         useUserSession();
 
-    // State to manage the currently selected tenant.
-    const [selectedTenant, setSelectedTenant] =
-        React.useState(userSession.selectedTenant);
+    const [formData, setFormData] = React.useState({
+        organizationName: '',
+        subscriptionType: '',
+    });
+
+    const [formErrors, setFormErrors] = React.useState<
+        Partial<{
+            organizationName: string;
+            subscriptionType: string;
+        }>
+    >({});
+
+    const handleInputChange = (
+        field: keyof typeof formData,
+        value: string,
+    ) => {
+        setFormData({
+            ...formData,
+            [field]: value,
+        });
+    };
+
+    const handleSubmit = () => {
+        try {
+            schema.parse(formData);
+
+            // Proceed with organization creation logic
+            console.log('Form data:', formData);
+
+            setFormData({
+                organizationName: '',
+                subscriptionType: '',
+            });
+            setShowCreateTenantDialog(false);
+
+            // Redirect the user to the organization settings page
+            // Add your redirection logic here
+        } catch (error) {
+            if (error instanceof z.ZodError) {
+                const fieldErrors: Partial<{
+                    organizationName: string;
+                    subscriptionType: string;
+                }> = {};
+
+                error.errors.forEach((err) => {
+                    if (err.path) {
+                        const fieldName = err
+                            .path[0] as keyof typeof formData;
+                        fieldErrors[fieldName] =
+                            err.message;
+                    }
+                });
+                setFormErrors(fieldErrors);
+            }
+        }
+    };
 
     // Function to determine the display value for the selected tenant.
     const getDisplayValue = () => {
@@ -77,6 +132,10 @@ export default function TeamSwitcher({
             )[0];
         return selectedTenant.name;
     };
+
+    // State to manage the currently selected tenant.
+    const [selectedTenant, setSelectedTenant] =
+        React.useState(userSession.selectedTenant);
 
     // State to manage the visibility of the popover and the create tenant dialog.
     const [open, setOpen] = React.useState(false);
@@ -89,7 +148,10 @@ export default function TeamSwitcher({
         if (userSession) {
             setSelectedTenant(userSession.selectedTenant);
         }
-    }, [userSession]);
+        if (showCreateTenantDialog) {
+            setFormErrors({});
+        }
+    }, [userSession, showCreateTenantDialog]);
 
     // Handler for tenant selection.
     const handleTenantSelect = (tenant: Tenant) => {
@@ -276,7 +338,23 @@ export default function TeamSwitcher({
                             <Input
                                 id="name"
                                 placeholder="My organization"
+                                value={
+                                    formData.organizationName
+                                }
+                                onChange={(e) =>
+                                    handleInputChange(
+                                        'organizationName',
+                                        e.target.value,
+                                    )
+                                }
                             />
+                            {formErrors.organizationName && (
+                                <div className="text-red-500 text-sm">
+                                    {
+                                        formErrors.organizationName
+                                    }
+                                </div>
+                            )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="plan">
@@ -323,9 +401,10 @@ export default function TeamSwitcher({
                     <Button
                         type="submit"
                         className={`hover:text-primary hover:bg-transparent hover:outline-dashed`}
-                        onClick={() =>
-                            setShowCreateTenantDialog(false)
-                        }
+                        // onClick={() =>
+                        //     setShowCreateTenantDialog(false)
+                        // }
+                        onClick={handleSubmit}
                     >
                         Create
                     </Button>
