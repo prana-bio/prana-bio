@@ -45,12 +45,18 @@ import {
 import { useUserSession } from '@/app/nucleus/context/user-provider';
 import { Tenant } from '@/app/types/Tenant';
 import { getInitials } from '@/app/nucleus/slice-and-dice';
+import { z } from 'zod';
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
     typeof PopoverTrigger
 >;
 
 interface TeamSwitcherProps extends PopoverTriggerProps {}
+
+const schema = z.object({
+    organizationName: z.string(),
+    subscriptionType: z.string(),
+});
 
 export default function TeamSwitcher({
     className,
@@ -191,7 +197,7 @@ export default function TeamSwitcher({
                             </CommandGroup>
 
                             {/* Other Tenants */}
-                            <CommandGroup heading="Other">
+                            <CommandGroup heading="Organizations">
                                 {userSession.tenants
                                     .filter(
                                         (tenant) =>
@@ -272,7 +278,7 @@ export default function TeamSwitcher({
                                 placeholder="My organization"
                             />
                         </div>
-                        {/* <div className="space-y-2">
+                        <div className="space-y-2">
                             <Label htmlFor="plan">
                                 Subscription plan
                             </Label>
@@ -287,11 +293,10 @@ export default function TeamSwitcher({
                                         </span>{' '}
                                         -{' '}
                                         <span className="text-muted-foreground">
-                                            Trial for two
-                                            weeks
+                                            Beta
                                         </span>
                                     </SelectItem>
-                                    <SelectItem value="pro">
+                                    {/* <SelectItem value="pro">
                                         <span className="font-medium">
                                             Pro
                                         </span>{' '}
@@ -300,10 +305,10 @@ export default function TeamSwitcher({
                                             $9/month per
                                             user
                                         </span>
-                                    </SelectItem>
+                                    </SelectItem> */}
                                 </SelectContent>
                             </Select>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
                 <DialogFooter>
@@ -315,7 +320,15 @@ export default function TeamSwitcher({
                     >
                         Cancel
                     </Button>
-                    <Button type="submit">Create</Button>
+                    <Button
+                        type="submit"
+                        className={`hover:text-primary hover:bg-transparent hover:outline-dashed`}
+                        onClick={() =>
+                            setShowCreateTenantDialog(false)
+                        }
+                    >
+                        Create
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
