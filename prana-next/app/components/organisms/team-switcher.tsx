@@ -6,6 +6,7 @@ import {
     CheckIcon,
     PlusCircledIcon,
 } from '@radix-ui/react-icons';
+import { Icons } from '@/app/components/atoms/icons';
 
 import { cn } from '@/app/nucleus/utils';
 import {
@@ -42,10 +43,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/app/components/molecules/select';
+import useCreateTenant from '@/app/nucleus/hooks/tenants/useCreateTenant';
 import { useUserSession } from '@/app/nucleus/context/user-provider';
 import { Tenant } from '@/app/types/Tenant';
 import { getInitials } from '@/app/nucleus/slice-and-dice';
 import { z } from 'zod';
+import { useFetch } from '@/app/nucleus/hooks/common/useFetch';
+import { toast } from '@/app/nucleus/hooks/common/useToast';
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
     typeof PopoverTrigger
@@ -63,6 +67,12 @@ const schema = z.object({
 export default function TeamSwitcher({
     className,
 }: TeamSwitcherProps) {
+    const {
+        createTenant,
+        isLoading: isCreateTenantLoading,
+        error: isCreateTenantError,
+    } = useCreateTenant();
+
     const { userSession, updateUserSession } =
         useUserSession();
 
@@ -88,26 +98,64 @@ export default function TeamSwitcher({
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         try {
             schema.parse(formData);
 
-            // Proceed with organization creation logic
-            console.log('Form data:', formData);
+            console.log(
+                'Organization form data:',
+                formData,
+            );
 
-            setFormData({
-                organizationName: '',
-                //  subscriptionType: '',
-            });
-            setShowCreateTenantDialog(false);
+            const { success, message, tenantId } =
+                await createTenant(
+                    formData.organizationName,
+                );
 
-            // Redirect the user to the organization settings page
-            // Add your redirection logic here
+            if (success) {
+                console.log(
+                    'Tenant Created with ID:',
+                    tenantId,
+                );
+                toast({
+                    title: 'Organization created succesffully',
+                    description: (
+                        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                            <code className="text-white">
+                                {JSON.stringify(
+                                    formData.organizationName,
+                                    null,
+                                    2,
+                                )}
+                            </code>
+                        </pre>
+                    ),
+                });
+                setFormData({
+                    organizationName: '',
+                });
+                setShowCreateTenantDialog(false);
+            } else {
+                console.error(message);
+                toast({
+                    title: message,
+                    description: (
+                        <pre className="mt-2 w-[340px] rounded-md bg-destructive p-4">
+                            <code className="text-white">
+                                {JSON.stringify(
+                                    formData.organizationName,
+                                    null,
+                                    2,
+                                )}
+                            </code>
+                        </pre>
+                    ),
+                });
+            }
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const fieldErrors: Partial<{
                     organizationName: string;
-                    //   subscriptionType: string;
                 }> = {};
 
                 error.errors.forEach((err) => {
@@ -401,11 +449,11 @@ export default function TeamSwitcher({
                     <Button
                         type="submit"
                         className={`hover:text-primary hover:bg-transparent hover:outline-dashed`}
-                        // onClick={() =>
-                        //     setShowCreateTenantDialog(false)
-                        // }
                         onClick={handleSubmit}
                     >
+                        {isCreateTenantLoading && (
+                            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                        )}
                         Create
                     </Button>
                 </DialogFooter>

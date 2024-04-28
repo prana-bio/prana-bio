@@ -217,7 +217,7 @@ export const getAuthDataAndConfigureNileWithoutTenant = (
     const authData = cookieStore.get('authData') as
         | AuthCookieData
         | undefined;
-    const userId = getUserId(authData);
+    const userId = getUserId(authData) as string;
     const nile = configureNile(authData, undefined);
     return { nile, userId };
 };
