@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     Card,
@@ -22,15 +22,33 @@ import {
     TableHeader,
     TableRow,
 } from '@/app/components/molecules/table';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from '@/app/components/molecules/dialog';
 
 import { Badge } from '@/app/components/molecules/badge';
 import { useUserSession } from '@/app/nucleus/context/user-provider'; // Import the context hook
+import { Tenant } from '@/app/types/Tenant';
+import { Button } from '@/app/components/molecules/button';
 
 // TODO: extend so if the user is an admin, they can see the edit cell which is a modal
 
 export function OrganizationsForm() {
     const { userSession } = useUserSession(); // Use the context hook to get userSession
     console.log(userSession.tenants);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [currentTenant, setCurrentTenant] =
+        useState<Tenant | null>(null);
+
+    const handleOpenDialog = (tenant: Tenant) => {
+        setCurrentTenant(tenant);
+        setDialogOpen(true);
+    };
+
     return (
         <Card>
             <CardHeader className="px-7">
@@ -127,8 +145,13 @@ export function OrganizationsForm() {
                                         'Admin' ? (
                                         <TableCell className="hidden sm:table-cell">
                                             <Badge
-                                                className="text-xs"
+                                                className="text-xs cursor-pointer"
                                                 variant="secondary"
+                                                onClick={() =>
+                                                    handleOpenDialog(
+                                                        tenant,
+                                                    )
+                                                }
                                             >
                                                 Edit
                                             </Badge>
@@ -148,6 +171,58 @@ export function OrganizationsForm() {
                         )}
                     </TableBody>
                 </Table>
+                {dialogOpen && currentTenant && (
+                    <Dialog
+                        open={dialogOpen}
+                        onOpenChange={setDialogOpen}
+                    >
+                        <DialogHeader>
+                            <DialogTitle>
+                                {currentTenant.name}
+                            </DialogTitle>
+                        </DialogHeader>
+                        <DialogContent>
+                            <p>
+                                <strong>Type:</strong>{' '}
+                                {currentTenant.type}
+                            </p>
+                            <p>
+                                <strong>Role:</strong>{' '}
+                                {currentTenant.roles.join(
+                                    ', ',
+                                )}
+                            </p>
+                            <p>
+                                <strong>Default:</strong>{' '}
+                                {currentTenant.default_tenant
+                                    ? 'Yes'
+                                    : 'No'}
+                            </p>
+                            <p>
+                                <strong>Created:</strong>{' '}
+                                {new Date(
+                                    currentTenant.created,
+                                ).toLocaleDateString(
+                                    'en-US',
+                                    {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                    },
+                                )}
+                            </p>
+                        </DialogContent>
+                        <DialogFooter>
+                            <Button
+                                onClick={() =>
+                                    setDialogOpen(false)
+                                }
+                            >
+                                Close
+                            </Button>
+                        </DialogFooter>
+                    </Dialog>
+                )}
             </CardContent>
         </Card>
     );
