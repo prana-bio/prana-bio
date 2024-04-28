@@ -57,7 +57,7 @@ const schema = z.object({
     organizationName: z.string().min(1, {
         message: 'Organization name is required',
     }),
-    subscriptionType: z.string(),
+    //  subscriptionType: z.string(),
 });
 
 export default function TeamSwitcher({
@@ -68,13 +68,13 @@ export default function TeamSwitcher({
 
     const [formData, setFormData] = React.useState({
         organizationName: '',
-        subscriptionType: '',
+        //   subscriptionType: '',
     });
 
     const [formErrors, setFormErrors] = React.useState<
         Partial<{
             organizationName: string;
-            subscriptionType: string;
+            // subscriptionType: string;
         }>
     >({});
 
@@ -97,7 +97,7 @@ export default function TeamSwitcher({
 
             setFormData({
                 organizationName: '',
-                subscriptionType: '',
+                //  subscriptionType: '',
             });
             setShowCreateTenantDialog(false);
 
@@ -107,7 +107,7 @@ export default function TeamSwitcher({
             if (error instanceof z.ZodError) {
                 const fieldErrors: Partial<{
                     organizationName: string;
-                    subscriptionType: string;
+                    //   subscriptionType: string;
                 }> = {};
 
                 error.errors.forEach((err) => {
@@ -356,7 +356,7 @@ export default function TeamSwitcher({
                                 </div>
                             )}
                         </div>
-                        <div className="space-y-2">
+                        {/* <div className="space-y-2">
                             <Label htmlFor="plan">
                                 Subscription plan
                             </Label>
@@ -374,7 +374,7 @@ export default function TeamSwitcher({
                                             Beta
                                         </span>
                                     </SelectItem>
-                                    {/* <SelectItem value="pro">
+                                    <SelectItem value="pro">
                                         <span className="font-medium">
                                             Pro
                                         </span>{' '}
@@ -383,10 +383,10 @@ export default function TeamSwitcher({
                                             $9/month per
                                             user
                                         </span>
-                                    </SelectItem> */}
+                                    </SelectItem>
                                 </SelectContent>
                             </Select>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <DialogFooter>
