@@ -9,6 +9,7 @@ import {
     handleErrorResponse,
     handleUnauthorizedResponse,
 } from '@/app/nucleus/middleware/response-utils';
+import { Tenant } from '@/app/types/Tenant';
 
 /**
  * Handles POST requests to create an organization.
@@ -29,7 +30,7 @@ export async function POST(
         await checkNameIsUnique(nile, organizationName);
 
         // Create an organizational tenant for the user
-        await createOrganizationTenant(
+        const tenantData = await createOrganizationTenant(
             nile,
             userId,
             organizationName,
@@ -38,6 +39,7 @@ export async function POST(
         // Return success response
         return handleSuccessResponse(
             {
+                data: tenantData,
                 message:
                     'Organization created successfully',
             },
@@ -88,21 +90,21 @@ async function checkNameIsUnique(
  * @param {any} nile - Nile instance.
  * @param {string} organizationName - Name of the organization.
  * @param {string} userId - ID of the user creating the organization.
- * @returns {Promise<string>} The ID of the newly created tenant.
+ * @returns {Promise<Tenant>} The newly created Tenant
  * @throws {Error} If an error occurs during tenant creation.
  */
 async function createOrganizationTenant(
     nile: any,
     userId: string,
     organizationName: string,
-): Promise<{ tenantId: string }> {
+): Promise<Tenant> {
     const createTenantQuery = `
          INSERT INTO tenants (name, default_country_id, type)
          VALUES ($1, $2, 'Organization')
          RETURNING id;
       `;
     try {
-        const tenantResult = await nile.db.query(
+        const tenantIdResult = await nile.db.query(
             createTenantQuery,
             [
                 organizationName,
@@ -115,13 +117,22 @@ async function createOrganizationTenant(
             RETURNING roles;
          `;
         await nile.db.query(assignRoleQuery, [
-            tenantResult.rows[0].id,
+            tenantIdResult.rows[0].id,
             userId,
             false,
         ]);
-        return {
-            tenantId: tenantResult.rows[0].id as string,
-        };
+        const tenantQuery = `
+            SELECT tenants.*, tenant_users.roles, tenant_users.default_tenant
+            FROM public.tenants
+            LEFT JOIN users.tenant_users ON tenant_users.tenant_id = tenants.id
+            WHERE tenant_users.user_id = $1 AND tenant_users.tenant_id = $2
+         `;
+        const tenantResult = await nile.db.query(
+            tenantQuery,
+            [userId, tenantIdResult.rows[0].id],
+        );
+
+        return tenantResult.rows[0] as Tenant;
     } catch (error: any) {
         throw new Error(
             `Error processing organization (tenant) creation or role assignment.`,

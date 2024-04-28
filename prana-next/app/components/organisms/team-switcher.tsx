@@ -107,7 +107,7 @@ export default function TeamSwitcher({
                 formData,
             );
 
-            const { success, message, tenantId } =
+            const { success, message, tenant } =
                 await createTenant(
                     formData.organizationName,
                 );
@@ -115,7 +115,7 @@ export default function TeamSwitcher({
             if (success) {
                 console.log(
                     'Tenant Created with ID:',
-                    tenantId,
+                    tenant?.id,
                 );
                 toast({
                     title: 'Organization created succesffully',
@@ -131,6 +131,7 @@ export default function TeamSwitcher({
                         </pre>
                     ),
                 });
+
                 setFormData({
                     organizationName: '',
                 });

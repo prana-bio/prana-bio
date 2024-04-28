@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { mutate } from 'swr';
+import { useUserSession } from '@/app/nucleus/context/user-provider';
+import { Tenant } from '@/app/types/Tenant';
 
 /**
  * Custom hook for creating a new tenant (organization).
@@ -13,13 +15,14 @@ import { mutate } from 'swr';
 const useCreateTenant = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const { updateUserSession } = useUserSession();
 
     const createTenant = async (
         organizationName: string,
     ): Promise<{
         success: boolean;
         message: string;
-        tenantId?: string;
+        tenant?: Tenant;
     }> => {
         setIsLoading(true);
         setError(null);
@@ -43,12 +46,19 @@ const useCreateTenant = () => {
                 throw new Error(message);
             }
 
-            const { tenantId } = await response.json();
+            const resp = await response.json();
+            const tenant = resp.data as Tenant;
+
+            updateUserSession((prevSession) => ({
+                ...prevSession,
+                selectedTenant: tenant,
+                tenants: [...prevSession.tenants, tenant],
+            }));
 
             return {
                 success: true,
                 message: 'Tenant created successfully',
-                tenantId,
+                tenant,
             };
         } catch (err) {
             const message =
