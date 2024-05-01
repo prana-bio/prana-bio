@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, Control } from 'react-hook-form';
+import * as z from 'zod';
 
 import {
     Card,
@@ -29,13 +32,33 @@ import {
     DialogTitle,
     DialogFooter,
 } from '@/app/components/molecules/dialog';
-
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/app/components/molecules/form';
+import { Input } from '@/app/components/atoms/input';
 import { Badge } from '@/app/components/molecules/badge';
 import { useUserSession } from '@/app/nucleus/context/user-provider'; // Import the context hook
 import { Tenant } from '@/app/types/Tenant';
 import { Button } from '@/app/components/molecules/button';
 
-// TODO: extend so if the user is an admin, they can see the edit cell which is a modal
+const organizationFormSchema = z.object({
+    email: z
+        .string({
+            required_error:
+                'Please select an email to display.',
+        })
+        .email(),
+});
+
+type OrganizationFormValues = z.infer<
+    typeof organizationFormSchema
+>;
 
 export function OrganizationsForm() {
     const { userSession } = useUserSession(); // Use the context hook to get userSession
@@ -48,6 +71,15 @@ export function OrganizationsForm() {
         setCurrentTenant(tenant);
         setDialogOpen(true);
     };
+
+    // Initialize form using react-hook-form
+    const form = useForm<OrganizationFormValues>({
+        resolver: zodResolver(organizationFormSchema),
+        defaultValues: {
+            email: userSession.user.email || '',
+        },
+        mode: 'onChange',
+    });
 
     return (
         <Card>
@@ -182,7 +214,24 @@ export function OrganizationsForm() {
                             </DialogTitle>
                         </DialogHeader>
                         <DialogContent>
-                            <p>
+                            <Form {...form}>
+                                <form
+                                    // onSubmit={form.handleSubmit(
+                                    //     onSubmit,
+                                    // )}
+                                    className="space-y-8"
+                                >
+                                    <EmailField
+                                        control={
+                                            form.control
+                                        }
+                                    />
+                                    <Button type="submit">
+                                        Update profile
+                                    </Button>
+                                </form>
+                            </Form>
+                            {/* <p>
                                 <strong>Type:</strong>{' '}
                                 {currentTenant.type}
                             </p>
@@ -210,7 +259,7 @@ export function OrganizationsForm() {
                                         day: 'numeric',
                                     },
                                 )}
-                            </p>
+                            </p> */}
                         </DialogContent>
                         <DialogFooter>
                             <Button
@@ -227,3 +276,29 @@ export function OrganizationsForm() {
         </Card>
     );
 }
+
+// Component for email field
+interface EmailFieldProps {
+    control: Control<OrganizationFormValues>;
+}
+const EmailField: React.FC<EmailFieldProps> = ({
+    control,
+}) => (
+    <FormField
+        control={control}
+        name="email"
+        render={({ field }) => (
+            <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                    <Input {...field} />
+                </FormControl>
+                <FormDescription>
+                    This email will be used for all
+                    communications and account management.
+                </FormDescription>
+                <FormMessage />
+            </FormItem>
+        )}
+    />
+);
