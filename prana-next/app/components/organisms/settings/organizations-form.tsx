@@ -56,7 +56,8 @@ const organizationFormSchema = z.object({
             required_error:
                 'Please select an email to display.',
         })
-        .email(),
+        .email()
+        .optional(),
 });
 
 type OrganizationFormValues = z.infer<
@@ -79,6 +80,10 @@ export function OrganizationsForm() {
     const form = useForm<OrganizationFormValues>({
         resolver: zodResolver(organizationFormSchema),
         defaultValues: {
+            name: currentTenant?.name || '',
+            type: currentTenant?.type || '',
+            default_country_id:
+                currentTenant?.default_country_id || '',
             email: userSession.user.email || '',
         },
         mode: 'onChange',
