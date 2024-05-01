@@ -229,7 +229,7 @@ export function OrganizationsForm() {
                                     // )}
                                     className="space-y-8"
                                 >
-                                    <EmailField
+                                    <NameField
                                         control={
                                             form.control
                                         }
@@ -285,25 +285,24 @@ export function OrganizationsForm() {
     );
 }
 
-// Component for email field
-interface EmailFieldProps {
+// Component for name field
+interface NameFieldProps {
     control: Control<OrganizationFormValues>;
 }
-const EmailField: React.FC<EmailFieldProps> = ({
+const NameField: React.FC<NameFieldProps> = ({
     control,
 }) => (
     <FormField
         control={control}
-        name="email"
+        name="name"
         render={({ field }) => (
             <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Organization Name</FormLabel>
                 <FormControl>
                     <Input {...field} />
                 </FormControl>
                 <FormDescription>
-                    This email will be used for all
-                    communications and account management.
+                    Enter the full name of the organization.
                 </FormDescription>
                 <FormMessage />
             </FormItem>
