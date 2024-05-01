@@ -48,6 +48,9 @@ import { Tenant } from '@/app/types/Tenant';
 import { Button } from '@/app/components/molecules/button';
 
 const organizationFormSchema = z.object({
+    name: z.string().optional(),
+    type: z.string().optional(),
+    default_country_id: z.string().optional(),
     email: z
         .string({
             required_error:
