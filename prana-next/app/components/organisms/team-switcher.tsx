@@ -374,8 +374,7 @@ export default function TeamSwitcher({
                     </DialogTitle>
                     <DialogDescription>
                         Add a new organization to track your
-                        organization's contributions and
-                        rewards centrally.
+                        contributions and rewards centrally.
                     </DialogDescription>
                 </DialogHeader>
                 <div>
