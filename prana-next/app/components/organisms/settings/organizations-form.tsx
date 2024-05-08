@@ -1,6 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, Control } from 'react-hook-form';
+import * as z from 'zod';
 
 import {
     Card,
@@ -22,15 +25,70 @@ import {
     TableHeader,
     TableRow,
 } from '@/app/components/molecules/table';
-
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from '@/app/components/molecules/dialog';
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/app/components/molecules/form';
+import { Input } from '@/app/components/atoms/input';
 import { Badge } from '@/app/components/molecules/badge';
 import { useUserSession } from '@/app/nucleus/context/user-provider'; // Import the context hook
+import { Tenant } from '@/app/types/Tenant';
+import { Button } from '@/app/components/molecules/button';
 
-// TODO: extend so if the user is an admin, they can see the edit cell which is a modal
+const organizationFormSchema = z.object({
+    name: z.string().optional(),
+    type: z.string().optional(),
+    default_country_id: z.string().optional(),
+    email: z
+        .string({
+            required_error:
+                'Please select an email to display.',
+        })
+        .email()
+        .optional(),
+});
+
+type OrganizationFormValues = z.infer<
+    typeof organizationFormSchema
+>;
 
 export function OrganizationsForm() {
     const { userSession } = useUserSession(); // Use the context hook to get userSession
     console.log(userSession.tenants);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [currentTenant, setCurrentTenant] =
+        useState<Tenant | null>(null);
+
+    const handleOpenDialog = (tenant: Tenant) => {
+        setCurrentTenant(tenant);
+        setDialogOpen(true);
+    };
+
+    // Initialize form using react-hook-form
+    const form = useForm<OrganizationFormValues>({
+        resolver: zodResolver(organizationFormSchema),
+        defaultValues: {
+            name: currentTenant?.name || '',
+            type: currentTenant?.type || '',
+            default_country_id:
+                currentTenant?.default_country_id || '',
+            email: userSession.user.email || '',
+        },
+        mode: 'onChange',
+    });
+
     return (
         <Card>
             <CardHeader className="px-7">
@@ -127,8 +185,13 @@ export function OrganizationsForm() {
                                         'Admin' ? (
                                         <TableCell className="hidden sm:table-cell">
                                             <Badge
-                                                className="text-xs"
+                                                className="text-xs cursor-pointer"
                                                 variant="secondary"
+                                                onClick={() =>
+                                                    handleOpenDialog(
+                                                        tenant,
+                                                    )
+                                                }
                                             >
                                                 Edit
                                             </Badge>
@@ -148,7 +211,102 @@ export function OrganizationsForm() {
                         )}
                     </TableBody>
                 </Table>
+                {dialogOpen && currentTenant && (
+                    <Dialog
+                        open={dialogOpen}
+                        onOpenChange={setDialogOpen}
+                    >
+                        <DialogHeader>
+                            <DialogTitle>
+                                {currentTenant.name}
+                            </DialogTitle>
+                        </DialogHeader>
+                        {/* <DialogContent>
+                            <Form {...form}>
+                                <form
+                                    // onSubmit={form.handleSubmit(
+                                    //     onSubmit,
+                                    // )}
+                                    className="space-y-8"
+                                >
+                                    <NameField
+                                        control={
+                                            form.control
+                                        }
+                                    />
+                                    <Button type="submit">
+                                        Update Organization
+                                        Name
+                                    </Button>
+                                </form>
+                            </Form>
+                             <p>
+                                <strong>Type:</strong>{' '}
+                                {currentTenant.type}
+                            </p>
+                            <p>
+                                <strong>Role:</strong>{' '}
+                                {currentTenant.roles.join(
+                                    ', ',
+                                )}
+                            </p>
+                            <p>
+                                <strong>Default:</strong>{' '}
+                                {currentTenant.default_tenant
+                                    ? 'Yes'
+                                    : 'No'}
+                            </p>
+                            <p>
+                                <strong>Created:</strong>{' '}
+                                {new Date(
+                                    currentTenant.created,
+                                ).toLocaleDateString(
+                                    'en-US',
+                                    {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                    },
+                                )}
+                            </p> 
+                        </DialogContent> */}
+                        <DialogFooter>
+                            <Button
+                                onClick={() =>
+                                    setDialogOpen(false)
+                                }
+                            >
+                                Close
+                            </Button>
+                        </DialogFooter>
+                    </Dialog>
+                )}
             </CardContent>
         </Card>
     );
 }
+
+// Component for name field
+interface NameFieldProps {
+    control: Control<OrganizationFormValues>;
+}
+const NameField: React.FC<NameFieldProps> = ({
+    control,
+}) => (
+    <FormField
+        control={control}
+        name="name"
+        render={({ field }) => (
+            <FormItem>
+                <FormLabel>Organization Name</FormLabel>
+                <FormControl>
+                    <Input {...field} />
+                </FormControl>
+                <FormDescription>
+                    Enter the full name of the organization.
+                </FormDescription>
+                <FormMessage />
+            </FormItem>
+        )}
+    />
+);

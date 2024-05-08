@@ -50,22 +50,10 @@ export async function POST(
 
             await updateUserInfo(nileU, userId, fullName);
 
-            const tenantId = await createPersonalTenant(
-                nileU,
-                decodedJWT,
-            );
-
-            const nileT = nile.getInstance({
-                tenantId: tenantId,
-                userId: userId,
-                api: {
-                    token: accessToken,
-                },
-            });
-
-            const roles =
-                await assignAdminRoleToPersonalTenant(
-                    nileT,
+            const { tenantId, roles } =
+                await createPersonalTenant(
+                    nileU,
+                    decodedJWT,
                 );
 
             const stripeCustomerId =
@@ -103,7 +91,7 @@ export async function POST(
 }
 
 /**
- * Creates a personal tenant for an authenticated user.
+ * Creates a personal tenant for an authenticated user, and assign admin role.
  *
  * @param {any} nileU - Authenticated Nile instance.
  * @param {DecodedJWTData} decodedJWT - Decoded JWT data.
@@ -113,52 +101,41 @@ export async function POST(
 async function createPersonalTenant(
     nileU: any,
     decodedJWT: DecodedJWTData,
-): Promise<string> {
+): Promise<{ tenantId: string; roles: string[] }> {
     const createTenantQuery = `
-   INSERT INTO users.tenants (name, user_id)
-   VALUES ($1, $2)
-   RETURNING id;
-`;
+      INSERT INTO tenants (name, default_country_id)
+      VALUES ($1, $2)
+      RETURNING id;
+   `;
     try {
         const tenantName = `Personal - ${decodedJWT.sub}`;
-        const result = await nileU.db.query(
+        const tenantResult = await nileU.db.query(
             createTenantQuery,
-            [tenantName, decodedJWT.sub],
+            [
+                tenantName,
+                'f43f9cf9-789b-42ad-ac83-d3170a44d2b0',
+            ],
         );
-        return result.rows[0].id;
-    } catch (error: any) {
-        throw new Error('Create Personal Tenant Error.', {
-            cause: error,
-        });
-    }
-}
-
-/**
- * Assigns admin role to a personal tenant.
- *
- * @param {any} nileT - Tenant-aware Nile instance.
- * @returns {Promise<string[]>} An array of assigned roles.
- * @throws {Error} If an error occurs during role assignment.
- */
-async function assignAdminRoleToPersonalTenant(
-    nileT: any,
-): Promise<string[]> {
-    const assignRoleQuery = `
-   UPDATE users.tenant_users
-   SET roles = ARRAY['Admin']::varchar[], default_tenant = true
-   WHERE tenant_id = $1
-   RETURNING roles;
-`;
-    try {
-        const result = await nileT.db.query(
+        const assignRoleQuery = `
+            INSERT INTO users.tenant_users (tenant_id, user_id, default_tenant, roles)
+            VALUES ($1, $2, $3, ARRAY['Admin']::varchar[])
+            RETURNING roles;
+         `;
+        const roleResult = await nileU.db.query(
             assignRoleQuery,
-            [nileT.tenantId],
+            [tenantResult.rows[0].id, nileU.userId, true],
         );
-        return result.rows[0].roles;
+        return {
+            tenantId: tenantResult.rows[0].id as string,
+            roles: roleResult.rows[0].roles as string[],
+        };
     } catch (error: any) {
-        throw new Error('Assign Admin Role Error.', {
-            cause: error,
-        });
+        throw new Error(
+            `Error processing tenant creation or role assignment.`,
+            {
+                cause: error,
+            },
+        );
     }
 }
 
@@ -234,23 +211,23 @@ async function updateUserInfo(
 /**
  * Updates additional tenant info.
  *
- * @param {any} nileT - Tenant-aware Nile instance.
+ * @param {any} nileU - User-aware Nile instance.
  * @param {string} userId - User identifier to update.
  * @param {string} stripeCustomerId - Stripe Customer identifier to save.
  * @throws {Error} If an error occurs while updating user info.
  */
 async function updateTenantInfo(
-    nileT: any,
+    nileU: any,
     tenantId: string | undefined,
     stripeCustomerId: string,
 ) {
     const updateTenantQuery = `
-   UPDATE users.tenants
-   SET stripe_customer_id = $1
-   WHERE id = $2;
-`;
+      UPDATE tenants
+      SET stripe_customer_id = $1
+      WHERE id = $2;
+   `;
     try {
-        await nileT.db.query(updateTenantQuery, [
+        await nileU.db.query(updateTenantQuery, [
             stripeCustomerId,
             tenantId,
         ]);
