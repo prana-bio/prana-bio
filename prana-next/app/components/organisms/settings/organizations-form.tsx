@@ -221,7 +221,7 @@ export function OrganizationsForm() {
                                 {currentTenant.name}
                             </DialogTitle>
                         </DialogHeader>
-                        <DialogContent>
+                        {/* <DialogContent>
                             <Form {...form}>
                                 <form
                                     // onSubmit={form.handleSubmit(
@@ -235,11 +235,12 @@ export function OrganizationsForm() {
                                         }
                                     />
                                     <Button type="submit">
-                                        Update profile
+                                        Update Organization
+                                        Name
                                     </Button>
                                 </form>
                             </Form>
-                            {/* <p>
+                             <p>
                                 <strong>Type:</strong>{' '}
                                 {currentTenant.type}
                             </p>
@@ -267,8 +268,8 @@ export function OrganizationsForm() {
                                         day: 'numeric',
                                     },
                                 )}
-                            </p> */}
-                        </DialogContent>
+                            </p> 
+                        </DialogContent> */}
                         <DialogFooter>
                             <Button
                                 onClick={() =>
