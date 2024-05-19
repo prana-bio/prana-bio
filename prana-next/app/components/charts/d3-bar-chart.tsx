@@ -2,16 +2,22 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-// Define the D3BarChart component
-const D3BarChart: React.FC = () => {
-    // Reference to the SVG element and its container
-    const svgRef = useRef<SVGSVGElement | null>(null);
-    const containerRef = useRef<HTMLDivElement | null>(
-        null,
-    );
+// Define the props interface
+interface D3BarChartProps {
+    data?: { name: string; value: number }[];
+    barColor?: string;
+    barHoverColor?: string;
+    axisColor?: string;
+    tooltipBackgroundColor?: string;
+    tooltipTextColor?: string;
+    gridColor?: string;
+    labelColor?: string;
+    xAxisTitle?: string;
+    yAxisTitle?: string;
+}
 
-    // Mock data to be displayed in the bar chart
-    const data = [
+const D3BarChart: React.FC<D3BarChartProps> = ({
+    data = [
         { name: 'A', value: 30 },
         { name: 'B', value: 80 },
         { name: 'C', value: 45 },
@@ -19,7 +25,22 @@ const D3BarChart: React.FC = () => {
         { name: 'E', value: 20 },
         { name: 'F', value: 90 },
         { name: 'G', value: 55 },
-    ];
+    ],
+    barColor = '#1A458E',
+    barHoverColor = '#5CB02C',
+    axisColor = 'rgba(105, 105, 105, 0.8)', // Gray with opacity for the labels
+    tooltipBackgroundColor = '#1A458E',
+    tooltipTextColor = 'white',
+    gridColor = 'rgba(105, 105, 105, 0.1)', // Dark gray with opacity for the grid
+    labelColor = 'rgba(105, 105, 105, 0.8)', // Gray with opacity for the labels,
+    xAxisTitle,
+    yAxisTitle,
+}) => {
+    // Reference to the SVG element and its container
+    const svgRef = useRef<SVGSVGElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(
+        null,
+    );
 
     // Function to create the chart
     const createChart = (width: number, height: number) => {
@@ -34,20 +55,13 @@ const D3BarChart: React.FC = () => {
             const margin = {
                 top: 20,
                 right: 20,
-                bottom: 30,
-                left: 40,
+                bottom: 50,
+                left: 50,
             };
             const innerWidth =
                 width - margin.left - margin.right;
             const innerHeight =
                 height - margin.top - margin.bottom;
-
-            // Define colors
-            const barColor = '#1A458E'; // Blue color from the logo
-            const barHoverColor = '#5CB02C'; // Green color from the logo
-            const axisColor = '#1A458E'; // Blue color for axes
-            const tooltipBackgroundColor = '#1A458E'; // Blue background for tooltips
-            const tooltipTextColor = 'white'; // White text for tooltips
 
             // Create scales for the x and y axes
             const x = d3
@@ -72,7 +86,7 @@ const D3BarChart: React.FC = () => {
                     `translate(${margin.left},${margin.top})`,
                 );
 
-            // Create the y-axis
+            // Create the y-axis with grid lines
             g.append('g')
                 .call(
                     d3
@@ -81,12 +95,12 @@ const D3BarChart: React.FC = () => {
                         .tickPadding(10),
                 )
                 .attr('color', axisColor) // Set axis color
-                .append('text')
-                .attr('fill', axisColor)
-                .attr('y', -10)
-                .attr('dy', '-1em')
-                .attr('text-anchor', 'end')
-                .text('Value');
+                .selectAll('text')
+                .attr('fill', labelColor); // Set label color
+
+            g.selectAll('.tick line')
+                .attr('stroke', gridColor)
+                .attr('stroke-dasharray', '4 2'); // Dashed grid lines
 
             // Create the x-axis
             g.append('g')
@@ -100,7 +114,32 @@ const D3BarChart: React.FC = () => {
                     'transform',
                     `translate(0,${innerHeight})`,
                 )
-                .attr('color', axisColor); // Set axis color
+                .attr('color', axisColor) // Set axis color
+                .selectAll('text')
+                .attr('fill', labelColor); // Set label color
+
+            // Add x-axis title if provided
+            if (xAxisTitle) {
+                svg.append('text')
+                    .attr('class', 'x-axis-title')
+                    .attr('text-anchor', 'middle')
+                    .attr('x', margin.left + innerWidth / 2)
+                    .attr('y', height - 10)
+                    .attr('fill', labelColor)
+                    .text(xAxisTitle);
+            }
+
+            // Add y-axis title if provided
+            if (yAxisTitle) {
+                svg.append('text')
+                    .attr('class', 'y-axis-title')
+                    .attr('text-anchor', 'middle')
+                    .attr('x', -height / 2)
+                    .attr('y', 15)
+                    .attr('transform', 'rotate(-90)')
+                    .attr('fill', labelColor)
+                    .text(yAxisTitle);
+            }
 
             // Define a div for the tooltip
             const tooltip = d3
@@ -198,7 +237,18 @@ const D3BarChart: React.FC = () => {
             return () =>
                 resizeObserver.unobserve(container);
         }
-    }, []);
+    }, [
+        data,
+        barColor,
+        barHoverColor,
+        axisColor,
+        tooltipBackgroundColor,
+        tooltipTextColor,
+        gridColor,
+        labelColor,
+        xAxisTitle,
+        yAxisTitle,
+    ]);
 
     // Return the responsive container and SVG element with inline styles for tooltip content
     return (
