@@ -37,6 +37,16 @@ export function MainNav({
             >
                 Mission
             </Link>
+            <Link
+                href="/charts"
+                className={`disabled text-sm font-medium transition-colors ${
+                    pathname === '/charts'
+                        ? 'text-black dark:text-white'
+                        : 'text-muted-foreground'
+                } hover:text-primary`}
+            >
+                Charts
+            </Link>
             {/* <Link
                 href="/contribute"
                 className={`disabled text-sm font-medium transition-colors ${
