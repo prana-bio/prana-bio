@@ -12,7 +12,6 @@ interface D3LineChartProps {
     data?: DataPoint[];
     datasets?: string[];
     lineColors?: string[];
-    lineHoverColor?: string;
     axisColor?: string;
     tooltipBackgroundColor?: string;
     tooltipTextColor?: string;
@@ -30,7 +29,6 @@ const D3LineChart: React.FC<D3LineChartProps> = ({
     ],
     datasets = ['dataset1', 'dataset2'],
     lineColors = ['#1A458E', '#5CB02C'],
-    lineHoverColor = '#FF6347',
     axisColor = 'rgba(105, 105, 105, 0.8)',
     tooltipBackgroundColor = '#1A458E',
     tooltipTextColor = 'white',
@@ -182,7 +180,24 @@ const D3LineChart: React.FC<D3LineChartProps> = ({
                     )
                     .attr('stroke-width', 2)
                     .attr('d', line)
-                    .attr('class', 'line')
+                    .attr('class', 'line');
+
+                const totalLength = (
+                    linePath.node() as SVGPathElement
+                ).getTotalLength();
+                linePath
+                    .attr(
+                        'stroke-dasharray',
+                        `${totalLength} ${totalLength}`,
+                    )
+                    .attr('stroke-dashoffset', totalLength)
+                    .transition()
+                    .duration(2000)
+                    .ease(d3.easeLinear)
+                    .attr('stroke-dashoffset', 0);
+
+                // Adding event listeners outside the transition to avoid timing issues
+                linePath
                     .on('mouseover', function () {
                         d3.select(this)
                             .transition()
@@ -252,8 +267,7 @@ const D3LineChart: React.FC<D3LineChartProps> = ({
                         d3.select(this)
                             .transition()
                             .duration(200)
-                            .attr('r', 7)
-                            .attr('fill', lineHoverColor);
+                            .attr('r', 7);
 
                         d3.select(this)
                             .transition()
@@ -302,39 +316,20 @@ const D3LineChart: React.FC<D3LineChartProps> = ({
             return () =>
                 resizeObserver.unobserve(container);
         }
-    }, [
-        data,
-        datasets,
-        lineColors,
-        lineHoverColor,
-        axisColor,
-        tooltipBackgroundColor,
-        tooltipTextColor,
-        gridColor,
-        labelColor,
-        xAxisTitle,
-        yAxisTitle,
-    ]);
+    }, [data, datasets, lineColors]);
 
     return (
         <div
             ref={containerRef}
-            style={{ width: '100%', height: '100%' }}
+            style={{
+                width: '100%',
+                height: '100%',
+            }}
         >
             <svg
                 ref={svgRef}
                 style={{ width: '100%', height: '100%' }}
             ></svg>
-            <style jsx>{`
-                .tooltip-content {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-                .tooltip-value {
-                    font-weight: bold;
-                }
-            `}</style>
         </div>
     );
 };
